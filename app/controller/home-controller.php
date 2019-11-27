@@ -15,4 +15,17 @@ class HomeController extends Controller
          require 'app/views/home/edit.php';
     }
 
+    public function listArticle()
+    {
+        $articles = $this->loadModel('ArticleModel')->getArticles();
+
+        require 'app/views/home/article-list.php';
+    }
+
+    public function listContent()
+    {
+        $contents = $this->loadModel('ContentModel')->getContents();
+
+        require 'app/views/home/content-list.php';
+    }
 }

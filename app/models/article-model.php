@@ -1,6 +1,6 @@
 <?php
 
-class MetadataModel
+class ArticleModel
 {
 
     function __construct($db) {
@@ -11,17 +11,14 @@ class MetadataModel
         }
     }
 
-    public function getMetadata() {
-        $sql = "SELECT * FROM metadata";
+    public function getArticles() {
+        $sql = "SELECT * FROM article";
         $query = $this->db->prepare($sql);
         $query->execute();
 
         $data = $query->fetchAll();
 
-        return [
-            'name' => $data[array_search('name', array_column($data, 'key'))]->value,
-            'version' => $data[array_search('version', array_column($data, 'key'))]->value
-        ];
+        // TODO figure this shit out
+        return $data;
     }
-
 }
