@@ -3,7 +3,7 @@
 class HomeController extends Controller
 {
 
-    public function index() 
+    public function index()
     {
          $metadata = $this->loadModel('MetadataModel')->getMetadata();
 

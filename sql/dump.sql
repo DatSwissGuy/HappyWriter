@@ -19,15 +19,14 @@ CREATE TABLE `article`
     `name`           varchar(255)  DEFAULT NULL,
     `description`    varchar(255)  DEFAULT NULL,
     `price`          decimal(5, 2) DEFAULT NULL,
-    `icon_name`      varchar(255)  DEFAULT NULL,
-    `icon_extension` varchar(3)    DEFAULT NULL,
+    `icon`      varchar(255)  DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-INSERT INTO `article` (`id`, `name`, `description`, `price`, `icon_name`, `icon_extension`)
-VALUES (1, 'Holzetui', 'Ein Etui aus Holz', 15.00, NULL, NULL),
-       (2, 'Stoffetui', 'Ein Etui aus Stoff', 10.00, NULL, NULL);
+INSERT INTO `article` (`id`, `name`, `description`, `price`, `icon`)
+VALUES (1, 'Holzetui', 'Ein Etui aus Holz', 15.00, NULL),
+       (2, 'Stoffetui', 'Ein Etui aus Stoff', 10.00, NULL);
 
 
 
@@ -50,16 +49,15 @@ CREATE TABLE `content`
     `name`           int(11)       DEFAULT NULL,
     `description`    varchar(255)  DEFAULT NULL,
     `price`          decimal(5, 2) DEFAULT NULL,
-    `icon_name`      varchar(255)  DEFAULT NULL,
-    `icon_extension` varchar(3)    DEFAULT NULL,
+    `icon`      varchar(255)  DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-INSERT INTO `content` (`id`, `name`, `description`, `price`, `icon_name`, `icon_extension`)
-VALUES (1, 'Bleistift', 'Ein Bleistift halt, kennt jeder', 1.50, NULL, NULL),
-       (2, 'Kugelschreiber', 'Ein Kugelschreiber, total normal', 2.50, NULL, NULL),
-       (3, 'Schere', 'Eine kleine Schere aus chinesium', 5.50, NULL, NULL);
+INSERT INTO `content` (`id`, `name`, `description`, `price`, `icon`)
+VALUES (1, 'Bleistift', 'Ein Bleistift aus Holz', 1.50, NULL),
+       (2, 'Kugelschreiber', 'Ein Kugelschreiber mit schwarzer Tinte', 2.50, NULL),
+       (3, 'Schere', 'Eine kleine Schere, passend für jedes Etui', 5.50, NULL);
 
 
 

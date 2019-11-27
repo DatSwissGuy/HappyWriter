@@ -18,7 +18,6 @@ class ContentModel
 
         $data = $query->fetchAll();
 
-        // TODO figure this shit out
         return $data;
     }
 }

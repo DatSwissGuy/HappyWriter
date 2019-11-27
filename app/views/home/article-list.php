@@ -19,7 +19,7 @@
             <th>Controller</th>
         </tr>
         <tr>
-            <td>No model</td>
+            <td>app/models/article-model.php</td>
             <td>app/views/home/article-list.php</td>
             <td>app/controller/home-controller.php</td>
         </tr>

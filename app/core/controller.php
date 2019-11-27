@@ -3,7 +3,7 @@
 /**
  * This is the "base controller class". All other "real" controllers extend this class.
  */
-class Controller
+abstract class Controller
 {
  
     public $db = null;
@@ -24,4 +24,5 @@ class Controller
         require 'app/models/' . strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $model_name)) . '.php';
         return new $model_name($this->db);
     }
+
 }
