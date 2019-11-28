@@ -11,7 +11,7 @@
     <h1>Gib deine Personalien an</h1>
 </div>
 <div class="container">
-    <form>
+    <form action="/home/verify_customer" method="post">
         <label for="first-name">Vorname</label>
         <input type="text" name="first-name" placeholder="Vorname">
         <label for="last-name">Nachname</label>

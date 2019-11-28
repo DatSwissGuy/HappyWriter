@@ -43,7 +43,13 @@ class HomeController extends Controller
     public function verify_customer() {
 
         $customer = $this->loadModel('CustomerModel');
+
         require 'app/views/home/verify-customer.php';
 
+    }
+
+    public function thankyou() {
+
+        require 'app/views/home/thankyou.php';
     }
 }

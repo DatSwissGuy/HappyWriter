@@ -18,6 +18,10 @@
     <p><strong>Postleitzahl: </strong></p>
     <p><strong>Telefon: </strong></p>
     <p><strong>Bemerkungen: </strong></p>
+    <br>
+    <form action="/home/thankyou">
+        <button type="submit">Bestätigen</button>
+    </form>
 </div>
 </body>
 </html>
