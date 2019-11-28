@@ -28,6 +28,7 @@ class HomeController extends Controller
     public function content() {
         // TODO remove selected article after debugging
         $selectedArticle = $this->loadModel('ArticleModel')->getSelectedArticle('Holzetui');
+
         $contents = $this->loadModel('ContentModel')->getContents();
 
         require 'app/views/home/content.php';
@@ -36,6 +37,13 @@ class HomeController extends Controller
     public function new_customer() {
 
         require 'app/views/home/new-customer.php';
+
+    }
+
+    public function verify_customer() {
+
+        $customer = $this->loadModel('CustomerModel');
+        require 'app/views/home/verify-customer.php';
 
     }
 }

@@ -10,7 +10,7 @@ class ConfigurationModel {
         }
     }
 
-    public function getContents() {
+    public function getConfiguration() {
         $sql = "SELECT * FROM order";
         $query = $this->db->prepare($sql);
         $query->execute();

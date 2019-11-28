@@ -11,7 +11,7 @@ class CustomerModel
         }
     }
 
-    public function getContents() {
+    public function getCustomer() {
         $sql = "SELECT * FROM customer";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -19,6 +19,10 @@ class CustomerModel
         $data = $query->fetchAll(PDO::FETCH_CLASS, 'Customer');
 
         return $data;
+    }
+
+    public function setCustomer() {
+
     }
 
 }

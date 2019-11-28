@@ -24,6 +24,11 @@
         <input type="text" name="zipcode" placeholder="Postleitzahl">
         <label for="telephone">Telefonnummer</label>
         <input type="text" name="telephone" placeholder="Telefonnumer">
+        <label for="annotations">Bemerkungen</label>
+        <textarea name="annotations"></textarea>
+        <br>
+        <button type="reset">Zurücksetzen</button>
+        <button type="submit">OK</button>
     </form>
 </div>
 </body>

@@ -10,5 +10,14 @@
 <div class="container">
     <h1>Bestätige deine Angaben</h1>
 </div>
+<div class="container">
+    <p><strong>Vorname: </strong></p>
+    <p><strong>Nachname: </strong></p>
+    <p><strong>Strasse: </strong></p>
+    <p><strong>Ort: </strong></p>
+    <p><strong>Postleitzahl: </strong></p>
+    <p><strong>Telefon: </strong></p>
+    <p><strong>Bemerkungen: </strong></p>
+</div>
 </body>
 </html>
