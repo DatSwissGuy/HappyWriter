@@ -50,9 +50,13 @@ CREATE TABLE `content`
   DEFAULT CHARSET = utf8;
 
 INSERT INTO `content` (`id`, `name`, `description`, `price`, `icon`)
-VALUES (1, 'Bleistift', 'Ein Bleistift aus Holz', 1.50, NULL),
-       (2, 'Kugelschreiber', 'Ein Kugelschreiber mit schwarzer Tinte', 2.50, NULL),
-       (3, 'Schere', 'Eine kleine Schere, passend für jedes Etui', 5.50, NULL);
+VALUES (1, 'Bleistift', 'Ein Bleistift aus Holz', 1.50, 'Bleistift.jpg'),
+       (2, 'Kugelschreiber', 'Ein Kugelschreiber mit schwarzer Tinte', 2.50, 'Kugelschreiber.jpg'),
+       (3, 'Schere', 'Eine kleine Schere, passend fuer jedes Etui', 5.50, 'Schere.jpg'),
+       (4, 'Feder', 'Der klassische \"Fuelli\"', 10.00, 'Feder.jpg'),
+       (5, 'Lineal', 'Ein kleiner Lineal, 15cm lang', 5.00, 'Lineal.jpg'),
+       (6, 'Zirkel', 'Ein Zirkel mit maximaler Spannweite von 30cm.', 15.50, 'Zirkel.jpg'),
+       (7, 'Spitzer', 'Spitzer fuer Bleistifte', 3.50, 'Spitzer.jpg');
 
 CREATE TABLE `customer`
 (
