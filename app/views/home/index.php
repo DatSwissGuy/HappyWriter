@@ -34,11 +34,8 @@
 </div>
 <div class="container">
     <hr>
-    <a href="/home">Home</a><br>
     <a href="/home/content">Content</a><br>
-    <a href="/home/new_customer/">Neukunde</a><br>
-    <hr>
-    <a href="/home/edit">Edit</a><br>
+    <a href="/home/new_customer">Place Order</a>
     <hr>
     <strong>Version: <?php echo $metadata['version'] ?></strong>
 </div>

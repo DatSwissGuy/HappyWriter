@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Gib deine Personalien an</h1>
+    <h1>Bestätige deine Angaben</h1>
 </div>
 </body>
 </html>
