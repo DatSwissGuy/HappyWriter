@@ -1,6 +1,7 @@
 <?php
 
 require 'app/models/Article.php';
+require 'app/models/Content.php';
 
 class HomeController extends Controller
 {

@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de-CH">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Happy Writer Webshop - Content List</title>
+    <title>
+        <?php /** @var $metadata MetadataModel */
+            echo $metadata['name']
+        ?>
+    </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -23,7 +27,8 @@
             <th>Beschreibung</th>
             <th>Preis</th>
         </tr>
-        <?php foreach ($contents as $content) {
+        <?php /** @var $contents Content[] */
+        foreach ($contents as $content) {
             echo "<tr>
                   <td>" . $content->name . "</td>
                   <td>" . $content->description . "</td>

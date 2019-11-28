@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de-CH">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
         <?php /** @var $metadata MetadataModel */
-        echo $metadata['name']
+            echo $metadata['name']
         ?>
     </title>
     <meta name="description" content="">

@@ -28,9 +28,13 @@ VALUES (1, 'Holzetui', 'Ein Etui aus Holz', 15.00, NULL),
 CREATE TABLE `configuration`
 (
     `id`         int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `article_id` int(11) DEFAULT NULL,
-    `content_id` int(11) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    `article_id` int(11) unsigned NOT NULL,
+    `content_id` int(11) unsigned NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `article_id` (`article_id`),
+    KEY `content_id` (`content_id`),
+    CONSTRAINT `configuration_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+    CONSTRAINT `configuration_ibfk_2` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -52,14 +56,14 @@ VALUES (1, 'Bleistift', 'Ein Bleistift aus Holz', 1.50, NULL),
 
 CREATE TABLE `customer`
 (
-    `id`             int(11) unsigned                  NOT NULL AUTO_INCREMENT,
-    `firstname`      varchar(45) DEFAULT NULL,
-    `lastname`       varchar(45) DEFAULT NULL,
-    `street`         varchar(45) DEFAULT NULL,
-    `city`           varchar(45) DEFAULT NULL,
-    `zipcode`        int(4) DEFAULT NULL,
-    `telephone`      int(10) DEFAULT NULL,
-    `customer_since` timestamp                         NULL DEFAULT NULL,
+    `id`             int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `firstname`      varchar(45)           DEFAULT NULL,
+    `lastname`       varchar(45)           DEFAULT NULL,
+    `street`         varchar(45)           DEFAULT NULL,
+    `city`           varchar(45)           DEFAULT NULL,
+    `zipcode`        int(4)                DEFAULT NULL,
+    `telephone`      int(10)               DEFAULT NULL,
+    `customer_since` timestamp        NULL DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -67,27 +71,38 @@ CREATE TABLE `customer`
 CREATE TABLE `order`
 (
     `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `customer_id` int(11)      DEFAULT NULL,
-    `date`        datetime     DEFAULT NULL,
-    `annotations` varchar(255) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    `customer_id` int(11) unsigned NOT NULL,
+    `date`        timestamp        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `annotations` varchar(255)              DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `customer_id` (`customer_id`),
+    CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `order_configuration`
+CREATE TABLE `order_configuration`
 (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `order_position_id` int(11) DEFAULT NULL,
-    `content_id` int(11) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    `id`                int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `order_position_id` int(11) unsigned NOT NULL,
+    `content_id`        int(11) unsigned NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `order_position_id` (`order_position_id`),
+    KEY `content_id` (`content_id`),
+    CONSTRAINT `order_configuration_ibfk_1` FOREIGN KEY (`order_position_id`) REFERENCES `order_position` (`id`),
+    CONSTRAINT `order_configuration_ibfk_2` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `order_position`
 (
     `id`         int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `order_id`   int(11) DEFAULT NULL,
-    `article_id` int(11) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    `order_id`   int(11) unsigned NOT NULL,
+    `article_id` int(11) unsigned NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `order_id` (`order_id`),
+    KEY `article_id` (`article_id`),
+    CONSTRAINT `order_position_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
+    CONSTRAINT `order_position_ibfk_2` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

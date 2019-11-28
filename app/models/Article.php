@@ -3,14 +3,15 @@
 
 class Article
 {
-    var $id;
+    public $id;
 
-    var $name;
+    public $name;
 
-    var $description;
+    public $description;
 
-    var $price;
+    public $price;
 
-    var $icon;
+    public $icon;
 
+    public $content;
 }
