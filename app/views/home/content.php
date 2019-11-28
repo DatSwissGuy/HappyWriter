@@ -9,27 +9,19 @@
 </head>
 <body>
 <div class="container">
-    <h1>[Table] Content List</h1>
+    <h2>Auswahl des Inhalts</h2>
 </div>
 <div class="container">
+    <h3>Gew&auml;hltes Etui</h3>
+    <?php echo $selectedArticle[0]->name; ?>
+</div>
+<div class="container">
+    <h3>Inhalte</h3>
     <table>
         <tr>
-            <th>Model</th>
-            <th>View</th>
-            <th>Controller</th>
-        </tr>
-        <tr>
-            <td>app/models/content-model.php</td>
-            <td>app/views/home/content-list.php</td>
-            <td>app/controller/home-controller.php</td>
-        </tr>
-    </table>
-    <hr>
-    <table>
-        <tr>
-        <th>Name</th>
-        <th>Beschreibung</th>
-        <th>Preis</th>
+            <th>Name</th>
+            <th>Beschreibung</th>
+            <th>Preis</th>
         </tr>
         <?php foreach ($contents as $content) {
             echo "<tr>
@@ -37,14 +29,12 @@
                   <td>" . $content->description . "</td>
                   <td>" . $content->price . "</td>
                   </tr>";
-            echo "<br>";
         } ?>
     </table>
+</div>
+<div class="container">
     <hr>
     <a href="/home">Home</a><br>
-    <a href="/home/edit">Edit</a><br>
-    <a href="/home/listArticle">Article List</a><br>
-    <a href="/home/listContent">Content List</a><br>
 </div>
 </body>
 </html>

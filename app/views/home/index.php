@@ -3,7 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Happy Writer Webshop</title>
+    <title>
+        <?php /** @var $metadata MetadataModel */
+        echo $metadata['name']
+        ?>
+    </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -14,21 +18,27 @@
 <div class="container">
     <table>
         <tr>
-            <th>Model</th>
-            <th>View</th>
-            <th>Controller</th>
+            <th>Name</th>
+            <th>Beschreibung</th>
+            <th>Preis</th>
         </tr>
-        <tr>
-            <td>app/models/metadata-model.php</td>
-            <td>app/views/home/index.php</td>
-            <td>app/controller/home-controller.php</td>
-        </tr>
+        <?php /** @var $articles Article[] */
+        foreach ($articles as $article) {
+            echo "<tr>
+                  <td>" . $article->name . "</td>
+                  <td>" . $article->description . "</td>
+                  <td>" . $article->price . "</td>
+                  </tr>";
+        } ?>
     </table>
+</div>
+<div class="container">
     <hr>
     <a href="/home">Home</a><br>
+    <a href="/home/content">Content</a><br>
+    <a href="/home/new_customer/">Neukunde</a><br>
+    <hr>
     <a href="/home/edit">Edit</a><br>
-    <a href="/home/listArticle">Article List</a><br>
-    <a href="/home/listContent">Content List</a><br>
     <hr>
     <strong>Version: <?php echo $metadata['version'] ?></strong>
 </div>

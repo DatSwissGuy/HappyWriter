@@ -16,7 +16,17 @@ class ArticleModel
         $query = $this->db->prepare($sql);
         $query->execute();
 
-        $data = $query->fetchAll();
+        $data = $query->fetchAll(PDO::FETCH_CLASS, 'Article');
+
+        return $data;
+    }
+
+    public function getSelectedArticle($selected) {
+        $sql = "SELECT * FROM article WHERE name = '$selected'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        $data = $query->fetchAll(PDO::FETCH_CLASS, 'Article');
 
         return $data;
     }

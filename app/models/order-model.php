@@ -1,6 +1,6 @@
 <?php
 
-class ContentModel
+class OrderModel
 {
 
     function __construct($db) {
@@ -12,12 +12,13 @@ class ContentModel
     }
 
     public function getContents() {
-        $sql = "SELECT * FROM content";
+        $sql = "SELECT * FROM order";
         $query = $this->db->prepare($sql);
         $query->execute();
 
-        $data = $query->fetchAll(PDO::FETCH_CLASS, 'Content');
+        $data = $query->fetchAll(PDO::FETCH_CLASS, 'Order');
 
         return $data;
     }
+
 }

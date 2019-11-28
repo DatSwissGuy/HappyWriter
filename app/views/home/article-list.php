@@ -43,8 +43,8 @@
     <hr>
     <a href="/home">Home</a><br>
     <a href="/home/edit">Edit</a><br>
-    <a href="/home/listArticle">Article List</a><br>
-    <a href="/home/listContent">Content List</a><br>
+    <a href="/home/article">Article List</a><br>
+    <a href="/home/content">Content List</a><br>
 </div>
 </body>
 </html>
