@@ -50,6 +50,8 @@ class HomeController extends Controller
 
     public function thankyou() {
 
+        $order = $this->loadModel('Order');
+
         require 'app/views/home/thankyou.php';
     }
 }

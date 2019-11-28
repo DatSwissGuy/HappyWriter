@@ -11,15 +11,15 @@
     <h1>Bestätige deine Angaben</h1>
 </div>
 <div class="container">
-    <p><strong>Vorname: </strong></p>
-    <p><strong>Nachname: </strong></p>
-    <p><strong>Strasse: </strong></p>
-    <p><strong>Ort: </strong></p>
-    <p><strong>Postleitzahl: </strong></p>
-    <p><strong>Telefon: </strong></p>
-    <p><strong>Bemerkungen: </strong></p>
+    <p><strong>Vorname: </strong><?php echo $_POST['first-name'] ?></p>
+    <p><strong>Nachname: </strong><?php echo $_POST['last-name'] ?></p>
+    <p><strong>Strasse: </strong><?php echo $_POST['street'] ?></p>
+    <p><strong>Ort: </strong><?php echo $_POST['city'] ?></p>
+    <p><strong>Postleitzahl: </strong><?php echo $_POST['zipcode'] ?></p>
+    <p><strong>Telefon: </strong><?php echo $_POST['telephone'] ?></p>
+    <p><strong>Bemerkungen: </strong><?php echo $_POST['annotations'] ?></p>
     <br>
-    <form action="/home/thankyou">
+    <form action="/home/thankyou" method="post">
         <button type="submit">Bestätigen</button>
     </form>
 </div>

@@ -15,7 +15,7 @@
         <label for="first-name">Vorname</label>
         <input type="text" name="first-name" placeholder="Vorname">
         <label for="last-name">Nachname</label>
-        <input type="text" name="first-name" placeholder="Nachname">
+        <input type="text" name="last-name" placeholder="Nachname">
         <label for="street">Strasse</label>
         <input type="text" name="street" placeholder="Street">
         <label for="city">Ort</label>
