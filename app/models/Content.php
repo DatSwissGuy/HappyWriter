@@ -3,13 +3,13 @@
 
 class Content
 {
-    public $id;
+    public int $id;
 
-    public $name;
+    public string $name;
 
-    public $description;
+    public string $description;
 
     public $price;
 
-    public $icon;
+    public string $icon;
 }

@@ -1,6 +1,7 @@
 <?php
 
-class OrderPositionModel {
+class OrderPositionModel
+{
 
     function __construct($db) {
         try {
@@ -19,4 +20,5 @@ class OrderPositionModel {
 
         return $data;
     }
+
 }

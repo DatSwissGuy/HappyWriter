@@ -20,4 +20,16 @@ class ContentModel
 
         return $data;
     }
+
+    public function insertIntoContent(string $name, string $description, float $price, string $icon) {
+        $sql = "INSERT INTO content (name, description, price, icon) 
+                VALUES (:name , :description, :price, :icon)";
+        $query = $this->db->prepare($sql);
+        // TODO check all types again e.g. zipcode
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->bindParam(':description', $description, PDO::PARAM_STR);
+        $query->bindParam(':price', $price, PDO::PARAM_STR);
+        $query->bindParam(':icon', $icon, PDO::PARAM_STR);
+    }
+
 }

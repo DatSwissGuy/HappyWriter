@@ -3,15 +3,13 @@
 
 class Article
 {
-    public $id;
+    public int $id;
 
-    public $name;
+    public string $name;
 
-    public $description;
+    public string $description;
 
-    public $price;
+    public float $price;
 
-    public $icon;
-
-    public $content;
+    public string $icon;
 }

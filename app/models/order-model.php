@@ -21,4 +21,13 @@ class OrderModel
         return $data;
     }
 
+    public function insertIntoOrder(int $customerId, string $annotations) {
+        $sql = "INSERT INTO order (customer_id, annotations)  
+                VALUES (:customerId, :annotations)";
+        $query = $this->db->prepare($sql);
+        // TODO check all types again e.g. zipcode
+        $query->bindParam(':customerId', $customerId, PDO::PARAM_STR);
+        $query->bindParam(':annotations', $annotations, PDO::PARAM_STR);
+    }
+
 }

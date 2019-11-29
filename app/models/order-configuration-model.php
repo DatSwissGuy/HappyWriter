@@ -2,6 +2,7 @@
 
 class OrderConfigurationModel
 {
+
     function __construct($db) {
         try {
             $this->db = $db;
@@ -19,4 +20,14 @@ class OrderConfigurationModel
 
         return $data;
     }
+
+    public function insertIntoOrderConfiguration($orderPositionId, $contentId) {
+        $sql = "INSERT INTO order_configuration (order_position_id, content_id) 
+                VALUES (:orderPositionId, :contentId)";
+        $query = $this->db->prepare($sql);
+        // TODO check all types again e.g. zipcode
+        $query->bindParam(':orderPositionId', $orderPositionId, PDO::PARAM_STR);
+        $query->bindParam(':contentId', $contentId, PDO::PARAM_STR);
+    }
+
 }

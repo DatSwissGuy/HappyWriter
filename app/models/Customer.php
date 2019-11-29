@@ -3,15 +3,15 @@
 
 class Customer
 {
-    public $firstname;
+    public string $firstname;
 
-    public $lastname;
+    public string $lastname;
 
-    public $street;
+    public string $street;
 
-    public $city;
+    public string $city;
 
-    public $zipcode;
+    public int $zipcode;
 
-    public $telephone;
+    public int $telephone;
 }

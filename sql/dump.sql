@@ -22,8 +22,8 @@ CREATE TABLE `article`
   DEFAULT CHARSET = utf8;
 
 INSERT INTO `article` (`id`, `name`, `description`, `price`, `icon`)
-VALUES (1, 'Holzetui', 'Ein Etui aus Holz', 15.00, NULL),
-       (2, 'Stoffetui', 'Ein Etui aus Stoff', 10.00, NULL);
+VALUES (1, 'Holzetui', 'Ein Etui aus Holz', 15.00, 'Holzetui.jpg'),
+       (2, 'Stoffetui', 'Ein Etui aus Stoff', 10.00, 'Stoffetui.jpg');
 
 CREATE TABLE `content`
 (

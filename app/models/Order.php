@@ -3,11 +3,11 @@
 
 class Order
 {
-    public $id;
+    public int $id;
 
-    public $customer_id;
+    public int $customer_id;
 
-    public $date;
+    public string $date;
 
-    public $annotations;
+    public string $annotations;
 }
