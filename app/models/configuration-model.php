@@ -25,7 +25,6 @@ class ConfigurationModel
         $sql = "INSERT INTO order_configuration (order_position_id, content_id) 
                 VALUES (:name, :description, :price, :icon)";
         $query = $this->db->prepare($sql);
-        // TODO check types
         $query->bindParam(':name', $name, PDO::PARAM_STR);
         $query->bindParam(':description', $description, PDO::PARAM_STR);
         $query->bindParam(':price', $price, PDO::PARAM_STR);

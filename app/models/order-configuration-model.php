@@ -21,6 +21,7 @@ class OrderConfigurationModel
         return $data;
     }
 
+    // TODO is this insert function needed? has only FK's...
     public function insertIntoOrderConfiguration($orderPositionId, $contentId) {
         $sql = "INSERT INTO order_configuration (order_position_id, content_id) 
                 VALUES (:orderPositionId, :contentId)";

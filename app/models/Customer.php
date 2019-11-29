@@ -3,6 +3,7 @@
 
 class Customer
 {
+
     public string $firstname;
 
     public string $lastname;
@@ -14,4 +15,5 @@ class Customer
     public int $zipcode;
 
     public int $telephone;
+
 }
