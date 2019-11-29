@@ -13,7 +13,7 @@ services:
             - php
             - mysql
     php:
-        image: php:7.3-fpm
+        image: php:7.4-fpm
         container_name: webshop_php
         build:
             context: docker/php

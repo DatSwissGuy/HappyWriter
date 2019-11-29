@@ -25,19 +25,6 @@ INSERT INTO `article` (`id`, `name`, `description`, `price`, `icon`)
 VALUES (1, 'Holzetui', 'Ein Etui aus Holz', 15.00, NULL),
        (2, 'Stoffetui', 'Ein Etui aus Stoff', 10.00, NULL);
 
-CREATE TABLE `configuration`
-(
-    `id`         int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `article_id` int(11) unsigned NOT NULL,
-    `content_id` int(11) unsigned NOT NULL,
-    PRIMARY KEY (`id`),
-    KEY `article_id` (`article_id`),
-    KEY `content_id` (`content_id`),
-    CONSTRAINT `configuration_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-    CONSTRAINT `configuration_ibfk_2` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
 CREATE TABLE `content`
 (
     `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -57,6 +44,19 @@ VALUES (1, 'Bleistift', 'Ein Bleistift aus Holz', 1.50, 'Bleistift.jpg'),
        (5, 'Lineal', 'Ein kleiner Lineal, 15cm lang', 5.00, 'Lineal.jpg'),
        (6, 'Zirkel', 'Ein Zirkel mit maximaler Spannweite von 30cm.', 15.50, 'Zirkel.jpg'),
        (7, 'Spitzer', 'Spitzer fuer Bleistifte', 3.50, 'Spitzer.jpg');
+
+CREATE TABLE `configuration`
+(
+    `id`         int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `article_id` int(11) unsigned NOT NULL,
+    `content_id` int(11) unsigned NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `article_id` (`article_id`),
+    KEY `content_id` (`content_id`),
+    CONSTRAINT `configuration_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+    CONSTRAINT `configuration_ibfk_2` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 CREATE TABLE `customer`
 (
@@ -84,7 +84,19 @@ CREATE TABLE `order`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE `order_configuration`
+CREATE TABLE `order_position`
+(
+    `id`         int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `order_id`   int(11) unsigned NOT NULL,
+    `article_id` int(11) unsigned NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `order_id` (`order_id`),
+    KEY `article_id` (`article_id`),
+    CONSTRAINT `order_position_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
+    CONSTRAINT `order_position_ibfk_2` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
 CREATE TABLE `order_configuration`
 (
     `id`                int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -98,15 +110,3 @@ CREATE TABLE `order_configuration`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE `order_position`
-(
-    `id`         int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `order_id`   int(11) unsigned NOT NULL,
-    `article_id` int(11) unsigned NOT NULL,
-    PRIMARY KEY (`id`),
-    KEY `order_id` (`order_id`),
-    KEY `article_id` (`article_id`),
-    CONSTRAINT `order_position_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
-    CONSTRAINT `order_position_ibfk_2` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
