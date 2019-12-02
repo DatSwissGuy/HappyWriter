@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="de-CH">
 <head>
@@ -11,15 +12,59 @@
     <h1>Bestätige deine Angaben</h1>
 </div>
 <div class="container">
-    <p><strong>Vorname: </strong><?php echo $_POST['first-name'] ?></p>
-    <p><strong>Nachname: </strong><?php echo $_POST['last-name'] ?></p>
-    <p><strong>Strasse: </strong><?php echo $_POST['street'] ?></p>
-    <p><strong>Ort: </strong><?php echo $_POST['city'] ?></p>
-    <p><strong>Postleitzahl: </strong><?php echo $_POST['zipcode'] ?></p>
-    <p><strong>Telefon: </strong><?php echo $_POST['telephone'] ?></p>
-    <p><strong>Bemerkungen: </strong><?php echo $_POST['annotations'] ?></p>
+    <p>
+        <strong>Vorname: </strong>
+        <?php
+        /** @var $customer Customer */
+        echo $customer->firstname
+        ?>
+    </p>
+    <p>
+        <strong>Nachname: </strong>
+        <?php
+        /** @var $customer Customer */
+        echo $customer->lastname
+        ?>
+    </p>
+    <p>
+        <strong>Strasse: </strong>
+        <?php
+        /** @var $customer Customer */
+        echo $customer->street
+        ?>
+    </p>
+    <p>
+        <strong>Ort: </strong>
+        <?php
+        /** @var $customer Customer */
+        echo $customer->city
+        ?>
+    </p>
+    <p>
+        <strong>Postleitzahl: </strong>
+        <?php
+        /** @var $customer Customer */
+        echo $customer->zipcode
+        ?>
+    </p>
+    <p>
+        <strong>Telefon: </strong>
+        <?php
+        /** @var $customer Customer */
+        echo $customer->telephone
+        ?>
+    </p>
+    <p>
+        <strong>Bemerkungen: </strong><?php echo $_POST['annotations'] ?>
+    </p>
     <br>
-    <form action="/home/thankyou" method="post">
+    <form action="/shop/thankyou" method="post">
+        <input type="hidden" name="first-name" value="<?php echo $customer->firstname ?>">
+        <input type="hidden" name="last-name" value="<?php echo $customer->lastname ?>">
+        <input type="hidden" name="street" value="<?php echo $customer->street ?>">
+        <input type="hidden" name="city" value="<?php echo $customer->city ?>">
+        <input type="hidden" name="zipcode" value="<?php echo $customer->zipcode ?>">
+        <input type="hidden" name="telephone" value="<?php echo $customer->telephone ?>">
         <button type="submit">Bestätigen</button>
     </form>
 </div>

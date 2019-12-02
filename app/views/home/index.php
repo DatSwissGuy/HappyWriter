@@ -12,29 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
 <div class="container">
     <h1><?php echo $metadata['name'] ?></h1>
 </div>
 <div class="container">
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Beschreibung</th>
-            <th>Preis</th>
-        </tr>
-        <?php /** @var $articles Article[] */
+<?php
+        /** @var $articles Article[] */
         foreach ($articles as $article) {
-            echo "<tr>
-                  <td>" . $article->name . "</td>
-                  <td>" . $article->description . "</td>
-                  <td>" . $article->price . "</td>
-                  </tr>";
-        } ?>
-    </table>
+            echo "<div><a href='/shop/content/" . $article->id . "'>" . $article->name . "</a></div>";
+        }
+?>
 </div>
 <div class="container">
     <hr>
-    <a href="/shop/content">Content</a><br>
     <a href="/customer/new_customer">Place Order</a>
     <hr>
     <strong>Version: <?php echo $metadata['version'] ?></strong>

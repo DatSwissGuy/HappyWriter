@@ -8,8 +8,12 @@ abstract class Controller
  
     public $db = null;
 
-    function __construct()
+    /** @var Application */
+    public $app = null;
+
+    function __construct($app)
     {
+        $this->app = $app;
         $this->openDatabaseConnection();
     }
 

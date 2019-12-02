@@ -21,9 +21,11 @@ class ArticleModel
         return $data;
     }
 
-    public function getSelectedArticle(string $selected) {
-        $sql = "SELECT * FROM article WHERE name = '$selected'";
+    public function getArticleById(int $id) {
+        $sql = "SELECT * FROM article WHERE id = :id";
         $query = $this->db->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+
         $query->execute();
 
         $data = $query->fetchAll(PDO::FETCH_CLASS, 'Article');
@@ -38,7 +40,7 @@ class ArticleModel
         $query->bindParam(':name', $name, PDO::PARAM_STR);
         $query->bindParam(':description', $description, PDO::PARAM_STR);
         $query->bindParam(':price', $price, PDO::PARAM_STR);
-        $query->bindParam('icon', $icon, PDO::PARAM_STR);
+        $query->bindParam(':icon', $icon, PDO::PARAM_STR);
     }
 
 

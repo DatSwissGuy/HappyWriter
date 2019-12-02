@@ -67,7 +67,7 @@ CREATE TABLE `customer`
     `city`           varchar(45)           DEFAULT NULL,
     `zipcode`        int(4)                DEFAULT NULL,
     `telephone`      int(10)               DEFAULT NULL,
-    `customer_since` timestamp        NULL DEFAULT NULL,
+    `customer_since` timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

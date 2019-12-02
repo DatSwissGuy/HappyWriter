@@ -3,9 +3,9 @@
 
 class OrderConfiguration
 {
-    public int $id;
+    public $id;
 
-    public int $order_position_id;
+    public $order_position_id;
 
-    public int $content_id;
+    public $content_id;
 }

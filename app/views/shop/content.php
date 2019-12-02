@@ -4,9 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
-        <?php /** @var $metadata MetadataModel */
-            echo $metadata['name']
-        ?>
     </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,30 +13,22 @@
     <h2>Auswahl des Inhalts</h2>
 </div>
 <div class="container">
-    <h3>Gew&auml;hltes Etui</h3>
-    <?php echo $selectedArticle[0]->name; ?>
+    <h3>Gew&auml;hltes Etui: <?php echo $selectedArticle[0]->name ?></h3>
 </div>
 <div class="container">
+    <form method="post" action="/shop/toCheckout"
     <h3>Inhalte</h3>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Beschreibung</th>
-            <th>Preis</th>
-        </tr>
-        <?php /** @var $contents Content[] */
-        foreach ($contents as $content) {
-            echo "<tr>
-                  <td>" . $content->name . "</td>
-                  <td>" . $content->description . "</td>
-                  <td>" . $content->price . "</td>
-                  </tr>";
-        } ?>
-    </table>
-</div>
-<div class="container">
-    <hr>
-    <a href="/home">Home</a><br>
+    <?php
+    foreach ($contentsForArticle as $content) {
+        echo "<div>
+                  <input type='checkbox' name='content-id-" . $content->id . "' value='" . $content->id . "'>" . $content->name . "
+              </div>";
+    }
+    ?>
+    <br>
+    <input type="hidden" name="article-id" value="<?php echo $selectedArticle[0]->id ?>">
+    <button type="submit">Bestaetigen</button>
+    </form>
 </div>
 </body>
 </html>

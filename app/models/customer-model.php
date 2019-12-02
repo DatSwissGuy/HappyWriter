@@ -21,7 +21,7 @@ class CustomerModel
         return $data;
     }
 
-    public function saveCustomer(string $firstname, string $lastname, string $street, string $city, int $zipcode, int $telephone) {
+    public function registerCustomer(string $firstname, string $lastname, string $street, string $city, int $zipcode, string $telephone) {
         $sql = "INSERT INTO customer (firstname, lastname, street, city, zipcode, telephone) 
                 VALUES (:firstname, :lastname, :street, :city, :zipcode, :telephone)";
         $query = $this->db->prepare($sql);
@@ -30,7 +30,9 @@ class CustomerModel
         $query->bindParam(':street', $street, PDO::PARAM_STR);
         $query->bindParam(':city', $city, PDO::PARAM_STR);
         $query->bindParam(':zipcode', $zipcode, PDO::PARAM_INT);
-        $query->bindParam(':telephone', $telephone, PDO::PARAM_INT);
+        $query->bindParam(':telephone', $telephone, PDO::PARAM_STR);
+
+        $query->execute();
     }
 
 }

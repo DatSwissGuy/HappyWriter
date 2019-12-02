@@ -21,6 +21,21 @@ class ContentModel
         return $data;
     }
 
+    public function getContentsByConfiguration(int $articleId) {
+        $sql = "SELECT * FROM content LEFT JOIN configuration 
+                ON content.id = configuration.content_id 
+                WHERE configuration.article_id = :articleId";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':articleId', $articleId, PDO::PARAM_INT);
+        $query->execute();
+
+        $data = $query->fetchAll(PDO::FETCH_CLASS, 'Content');
+
+        return $data;
+
+
+    }
+
     public function insertIntoContent(string $name, string $description, float $price, string $icon) {
         $sql = "INSERT INTO content (name, description, price, icon) 
                 VALUES (:name , :description, :price, :icon)";
@@ -29,6 +44,8 @@ class ContentModel
         $query->bindParam(':description', $description, PDO::PARAM_STR);
         $query->bindParam(':price', $price, PDO::PARAM_STR);
         $query->bindParam(':icon', $icon, PDO::PARAM_STR);
+
+        $query->execute();
     }
 
 }

@@ -21,14 +21,13 @@ class OrderConfigurationModel
         return $data;
     }
 
-    // TODO is this insert function needed? has only FK's...
-    public function insertIntoOrderConfiguration($orderPositionId, $contentId) {
+    public function create($orderPositionId, $contentId) {
         $sql = "INSERT INTO order_configuration (order_position_id, content_id) 
                 VALUES (:orderPositionId, :contentId)";
         $query = $this->db->prepare($sql);
-        // TODO check all types again e.g. zipcode
-        $query->bindParam(':orderPositionId', $orderPositionId, PDO::PARAM_STR);
-        $query->bindParam(':contentId', $contentId, PDO::PARAM_STR);
+        $query->bindParam(':orderPositionId', $orderPositionId, PDO::PARAM_INT);
+        $query->bindParam(':contentId', $contentId, PDO::PARAM_INT);
+        $query->execute();
     }
 
 }

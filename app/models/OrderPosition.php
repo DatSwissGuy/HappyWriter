@@ -3,9 +3,9 @@
 
 class OrderPosition
 {
-    public int $id;
+    public $id;
 
-    public int $article_id;
+    public $article_id;
 
-    public int $content_id;
+    public $content_id;
 }

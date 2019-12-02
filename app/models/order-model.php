@@ -21,13 +21,13 @@ class OrderModel
         return $data;
     }
 
-    // TODO is customer id needed as an insert, it's an FK.
-    public function insertIntoOrder(int $customerId, string $annotations) {
-        $sql = "INSERT INTO order (customer_id, annotations)  
-                VALUES (:customerId, :annotations)";
+    public function create() {
+        $sql = "INSERT INTO `order` (`customer_id`, `annotations`) 
+                VALUES (NULL, NULL)";
         $query = $this->db->prepare($sql);
-        $query->bindParam(':customerId', $customerId, PDO::PARAM_STR);
-        $query->bindParam(':annotations', $annotations, PDO::PARAM_STR);
+        $query->execute();
+
+        return $this->db->lastInsertId();
     }
 
 }

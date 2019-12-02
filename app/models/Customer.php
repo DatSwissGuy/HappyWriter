@@ -4,16 +4,16 @@
 class Customer
 {
 
-    public string $firstname;
+    public $firstname;
 
-    public string $lastname;
+    public $lastname;
 
-    public string $street;
+    public $street;
 
-    public string $city;
+    public $city;
 
-    public int $zipcode;
+    public $zipcode;
 
-    public int $telephone;
+    public $telephone;
 
 }

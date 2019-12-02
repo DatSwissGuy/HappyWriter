@@ -22,10 +22,10 @@ class Application
 
         if (file_exists('./app/controller/' . $this->url_controller . '.php')) {
             require './app/controller/' . $this->url_controller . '.php';
-  
+
             $controller = str_replace(' ', '', ucwords(str_replace('-', ' ', $this->url_controller)));
 
-            $this->url_controller = new $controller;
+            $this->url_controller = new $controller($this);
 
             if (method_exists($this->url_controller, $this->url_action)) {
                 if (isset($this->url_parameter_3)) {
@@ -41,8 +41,8 @@ class Application
                 $this->url_controller->index();
             }
         } else {
-            require './app/controller/home-controller.php';
-            $home = new HomeController();
+            require './app/controller/shop-controller.php';
+            $home = new ShopController($this);
             $home->index();
         }
     }
@@ -67,5 +67,9 @@ class Application
             echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
             echo 'Parameter 3: ' . $this->url_parameter_3 . '<br />';
         }
+    }
+
+    public function getParameter1() {
+        return $this->url_parameter_1;
     }
 }
