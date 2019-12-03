@@ -29,6 +29,8 @@
         <br>
         <button type="reset">Zurücksetzen</button>
         <button type="submit">OK</button>
+
+        <input type="hidden" name="order-id" value="<?php echo $order->id ?>">
     </form>
 </div>
 </body>

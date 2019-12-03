@@ -32,7 +32,7 @@
     <?php
     /** @var OrderModel $orderId */
     if ($orderId !== null) {
-    echo "<a href='/customer/new_customer/" . $orderId . "'>Place Order</a>";
+        echo "<a href='/customer/new_customer/" . $orderId . "'>Place Order</a>";
     }
     ?>
     <br>

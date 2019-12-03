@@ -45,7 +45,13 @@ class OrderModel
         return $data;
     }
 
-    public function getPriceOfSelectedArticle(int $articleId) {
-        $sql = "SELECT `article.price`";
+    public function updateCurrentOrder(int $customerId, int $orderId, string $annotations) {
+        $sql = "UPDATE `order` SET `customer_id` = :customerId, `annotations` = :annotations
+                WHERE `id` = :orderId";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':customerId', $customerId, PDO::PARAM_INT);
+        $query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+        $query->bindParam(':annotations', $annotations, PDO::PARAM_STR);
+        $query->execute();
     }
 }

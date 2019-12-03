@@ -42,7 +42,7 @@ class ShopController extends Controller
 
     public function thankyou() {
         $customerModel = $this->loadModel('CustomerModel');
-        $customerModel->registerCustomer(
+        $customerId = $customerModel->registerCustomer(
             $_POST['first-name'],
             $_POST['last-name'],
             $_POST['city'],
@@ -50,6 +50,9 @@ class ShopController extends Controller
             $_POST['zipcode'],
             $_POST['telephone']
         );
+
+        $orderModel = $this->loadModel('OrderModel');
+        $updateOrder = $orderModel->updateCurrentOrder($customerId, $_POST['order-id'], $_POST['annotations']);
 
         require 'app/views/shop/thankyou.php';
     }

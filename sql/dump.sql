@@ -118,7 +118,7 @@ CREATE TABLE `order_configuration`
     PRIMARY KEY (`id`),
     KEY `order_position_id` (`order_position_id`),
     KEY `content_id` (`content_id`),
-    FOREIGN KEY (`order_position_id`) REFERENCES `order_position` (`id`)
+    FOREIGN KEY (`order_position_id`) REFERENCES `order_position` (`id`),
+    FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-

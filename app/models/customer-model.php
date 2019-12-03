@@ -33,6 +33,8 @@ class CustomerModel
         $query->bindParam(':telephone', $telephone, PDO::PARAM_STR);
 
         $query->execute();
+
+        return $this->db->lastInsertId();
     }
 
 }

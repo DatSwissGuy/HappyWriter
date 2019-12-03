@@ -5,6 +5,12 @@ class CustomerController extends Controller
 {
 
     public function new_customer() {
+
+        require 'app/models/Order.php';
+        $order = new Order;
+        $order->id = $this->app->getParameter1();
+        echo $order->id;
+
         require 'app/views/customer/new-customer.php';
     }
 
@@ -22,6 +28,8 @@ class CustomerController extends Controller
         $customer->street = $_POST['street'];
         $customer->zipcode = $_POST['zipcode'];
         $customer->telephone = $_POST['telephone'];
+
+        $orderId = $_POST['order-id'];
 
         require 'app/views/customer/verify-customer.php';
     }
