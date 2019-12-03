@@ -10,6 +10,10 @@ class CustomerController extends Controller
 
     public function verify_customer() {
 
+        require 'app/models/Order.php';
+        $order = new Order;
+        $order->annotations = $_POST['annotations'];
+
         require 'app/models/Customer.php';
         $customer = new Customer;
         $customer->firstname = $_POST['first-name'];
@@ -18,8 +22,8 @@ class CustomerController extends Controller
         $customer->street = $_POST['street'];
         $customer->zipcode = $_POST['zipcode'];
         $customer->telephone = $_POST['telephone'];
+
         require 'app/views/customer/verify-customer.php';
     }
-
 
 }

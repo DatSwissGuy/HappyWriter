@@ -7,35 +7,42 @@ class ShopController extends Controller
 {
 
     public function index() {
-
-        $metadata = $this->loadModel('MetadataModel')->getMetadata();
+        /** @var MetadataModel $metadataModel */
+        $metadataModel = $this->loadModel('MetadataModel');
+        $metadata = $metadataModel->getMetadata();
 
         /** @var ArticleModel $articleModel */
         $articleModel = $this->loadModel('ArticleModel');
         $articles = $articleModel->getArticles();
 
+        // Initialize order on first call of page
+        $orderId = null;
 
         require 'app/views/home/index.php';
     }
 
     public function article() {
-        $articles = $this->loadModel('ArticleModel')->getArticles();
+        /** @var ArticleModel $articleModel */
+        $articleModel = $this->loadModel('ArticleModel');
+        $articles = $articleModel->loadModel('ArticleModel')->getArticles();
 
         require 'app/views/shop/article.php';
     }
 
     public function content() {
+        /** @var ArticleModel $articleModel */
+        $articleModel = $this->loadModel('ArticleModel');
+        $selectedArticle = $articleModel->getArticleById($this->app->getParameter1());
 
-        $selectedArticle = $this->loadModel('ArticleModel')->getArticleById($this->app->getParameter1());
-
-        $contentsForArticle = $this->loadModel('ContentModel')->getContentsByConfiguration($this->app->getParameter1());
+        $contentModel = $this->loadModel('ContentModel');
+        $contentsForArticle = $contentModel->getContentsByConfiguration($this->app->getParameter1());
 
         require 'app/views/shop/content.php';
     }
 
     public function thankyou() {
-
-        $this->loadModel('CustomerModel')->registerCustomer(
+        $customerModel = $this->loadModel('CustomerModel');
+        $customerModel->registerCustomer(
             $_POST['first-name'],
             $_POST['last-name'],
             $_POST['city'],
@@ -48,20 +55,25 @@ class ShopController extends Controller
     }
 
     public function toCheckout() {
+        /** @var MetadataModel $metadataModel */
+        $metadataModel = $this->loadModel('MetadataModel');
+        $metadata = $metadataModel->getMetadata();
+
         $articleId = $_POST['article-id'];
-
-        $metadata = $this->loadModel('MetadataModel')->getMetadata();
-
+        /** @var ArticleModel $articleModel */
         $articleModel = $this->loadModel('ArticleModel');
         $articles = $articleModel->getArticles();
+        $articleById = $articleModel->getArticleById($articleId);
 
-        $articlePrice = $articleModel->getArticleById($articleId);
+        /** @var OrderModel $orderModel */
+        $orderModel = $this->loadModel('OrderModel');
+        $orderId = $orderModel->create();
 
-        $order = $this->loadModel('OrderModel');
-        $orderId = $order->create();
+        /** @var OrderPositionModel $orderPosModel */
+        $orderPosModel = $this->loadModel('OrderPositionModel');
+        $orderPos= $orderPosModel->create($articleId, $orderId);
 
-        $orderPos = $this->loadModel('OrderPositionModel')->create($articleId, $orderId);
-
+        // TODO move function to a better place
         function preg_grep_keys($pattern, $input) {
             $keys = preg_grep($pattern, array_keys($input));
             $values = [];
@@ -70,27 +82,30 @@ class ShopController extends Controller
             }
             return $values;
         }
+
         $contentIds = preg_grep_keys('/content-id/i', $_POST);
-        $orderConfig = $this->loadModel('OrderConfigurationModel');
+
+        /** @var OrderConfigurationModel $orderConfigModel */
+        $orderConfigModel = $this->loadModel('OrderConfigurationModel');
 
         foreach ($contentIds as $contentId) {
-            $orderConfig->create($orderPos, $contentId);
+            $orderConfigModel->create($orderPos, $contentId);
         }
 
-        $items = $order->getOrderedContentsById($orderId);
-        $sumItems = 0;
+        $orderContents = $orderModel->getOrderedContentsById($orderId);
+        $sumContents = 0;
 
         require 'app/views/home/index.php';
 
-        // price calculation prototype
-        echo $articlePrice[0]->name.": <strong>".$articlePrice[0]->price."</strong><br>";
-        foreach ($items as $item) {
-            echo $item->name.": <strong>".$item->price."</strong><br>";
+        // TODO move some parts to view
+        echo $articleById[0]->name.": <strong>".$articleById[0]->price."</strong><br>";
+        foreach ($orderContents as $orderContent) {
+            echo $orderContent->name.": <strong>".$orderContent->price."</strong><br>";
 
-            $sumItems += $item->price;
+            $sumContents += $orderContent->price;
         }
 
-        echo "Summe: <strong>".number_format($sumItems+$articlePrice[0]->price, 2,'.', '')."</strong>";
+        echo "Summe: <strong>".number_format($sumContents+$articleById[0]->price, 2,'.', '')."</strong>";
     }
 
 }

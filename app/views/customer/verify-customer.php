@@ -54,7 +54,11 @@
         ?>
     </p>
     <p>
-        <strong>Bemerkungen: </strong><?php echo $_POST['annotations'] ?>
+        <strong>Bemerkungen: </strong>
+        <?php
+        /** @var Order $order */
+        echo $order->annotations
+        ?>
     </p>
     <br>
     <form action="/shop/thankyou" method="post">
@@ -64,7 +68,7 @@
         <input type="hidden" name="city" value="<?php echo $customer->city ?>">
         <input type="hidden" name="zipcode" value="<?php echo $customer->zipcode ?>">
         <input type="hidden" name="telephone" value="<?php echo $customer->telephone ?>">
-        <button type="submit">Bestätigen</button>
+        <button type="submit">Best&auml;tigen</button>
     </form>
 </div>
 </body>

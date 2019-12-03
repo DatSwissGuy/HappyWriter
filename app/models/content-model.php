@@ -35,10 +35,10 @@ class ContentModel
 
 
     }
-
+    // TODO needed for future admin panel
     public function insertIntoContent(string $name, string $description, float $price, string $icon) {
         $sql = "INSERT INTO content (name, description, price, icon) 
-                VALUES (:name , :description, :price, :icon)";
+                VALUES (:name, :description, :price, :icon)";
         $query = $this->db->prepare($sql);
         $query->bindParam(':name', $name, PDO::PARAM_STR);
         $query->bindParam(':description', $description, PDO::PARAM_STR);

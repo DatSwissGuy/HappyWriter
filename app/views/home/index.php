@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
         <?php /** @var $metadata MetadataModel */
-            echo $metadata['name']
+        echo $metadata['name']
         ?>
     </title>
     <meta name="description" content="">
@@ -14,21 +14,29 @@
 <body>
 
 <div class="container">
-    <h1><?php echo $metadata['name'] ?></h1>
+    <h1><?php
+        echo $metadata['name']
+        ?>
+    </h1>
 </div>
 <div class="container">
-<?php
-        /** @var $articles Article[] */
-        foreach ($articles as $article) {
-            echo "<div><a href='/shop/content/" . $article->id . "'>" . $article->name . "</a></div>";
-        }
-?>
+    <?php
+    /** @var Article[] $articles */
+    foreach ($articles as $article) {
+        echo "<div><a href='/shop/content/" . $article->id . "'>" . $article->name . "</a></div>";
+    }
+    ?>
 </div>
 <div class="container">
-    <hr>
-    <a href="/customer/new_customer">Place Order</a>
-    <hr>
-    <strong>Version: <?php echo $metadata['version'] ?></strong>
+    <br>
+    <?php
+    /** @var OrderModel $orderId */
+    if ($orderId !== null) {
+    echo "<a href='/customer/new_customer/" . $orderId . "'>Place Order</a>";
+    }
+    ?>
+    <br>
+    <br>
 </div>
 </body>
 </html>

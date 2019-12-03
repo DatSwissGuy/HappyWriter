@@ -33,6 +33,7 @@ class ArticleModel
         return $data;
     }
 
+    // TODO needed for future admin panel
     public function insertIntoArticle(string $name, string $description, float $price, string $icon) {
         $sql = "INSERT INTO article (name, description, price, icon) 
                 VALUES (:name, :description, :price, :icon)";
