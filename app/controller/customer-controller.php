@@ -9,7 +9,6 @@ class CustomerController extends Controller
         require 'app/models/Order.php';
         $order = new Order;
         $order->id = $this->app->getParameter1();
-        echo $order->id;
 
         require 'app/views/customer/new-customer.php';
     }
