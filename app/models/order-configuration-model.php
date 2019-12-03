@@ -27,7 +27,7 @@ class OrderConfigurationModel
         $query = $this->db->prepare($sql);
         $query->bindParam(':orderPositionId', $orderPositionId, PDO::PARAM_INT);
         $query->bindParam(':contentId', $contentId, PDO::PARAM_INT);
+
         $query->execute();
     }
-
 }

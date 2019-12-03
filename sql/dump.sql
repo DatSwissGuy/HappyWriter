@@ -58,6 +58,19 @@ CREATE TABLE `configuration`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+INSERT INTO `configuration` (`id`, `article_id`, `content_id`)
+VALUES
+(1, 1, 1),
+(3, 1, 2),
+(4, 1, 3),
+(5, 1, 4),
+(6, 1, 5),
+(8, 2, 1),
+(9, 2, 2),
+(10, 2, 3),
+(11, 2, 6),
+(12, 2, 7);
+
 CREATE TABLE `customer`
 (
     `id`             int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -66,7 +79,7 @@ CREATE TABLE `customer`
     `street`         varchar(45)           DEFAULT NULL,
     `city`           varchar(45)           DEFAULT NULL,
     `zipcode`        int(4)                DEFAULT NULL,
-    `telephone`      int(10)               DEFAULT NULL,
+    `telephone`      varchar(10)           DEFAULT NULL,
     `customer_since` timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
@@ -75,12 +88,12 @@ CREATE TABLE `customer`
 CREATE TABLE `order`
 (
     `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `customer_id` int(11) unsigned NOT NULL,
+    `customer_id` int(11) unsigned DEFAULT NULL,
     `date`        timestamp        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `annotations` varchar(255)              DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `customer_id` (`customer_id`),
-    CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
+    FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -92,8 +105,8 @@ CREATE TABLE `order_position`
     PRIMARY KEY (`id`),
     KEY `order_id` (`order_id`),
     KEY `article_id` (`article_id`),
-    CONSTRAINT `order_position_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
-    CONSTRAINT `order_position_ibfk_2` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
+    FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
+    FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -105,8 +118,7 @@ CREATE TABLE `order_configuration`
     PRIMARY KEY (`id`),
     KEY `order_position_id` (`order_position_id`),
     KEY `content_id` (`content_id`),
-    CONSTRAINT `order_configuration_ibfk_1` FOREIGN KEY (`order_position_id`) REFERENCES `order_position` (`id`),
-    CONSTRAINT `order_configuration_ibfk_2` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
+    FOREIGN KEY (`order_position_id`) REFERENCES `order_position` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 

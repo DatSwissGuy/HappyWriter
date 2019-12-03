@@ -48,13 +48,19 @@ class ShopController extends Controller
     }
 
     public function toCheckout() {
+        $articleId = $_POST['article-id'];
+
         $metadata = $this->loadModel('MetadataModel')->getMetadata();
 
-        $articles = $this->loadModel('ArticleModel')->getArticles();
+        $articleModel = $this->loadModel('ArticleModel');
+        $articles = $articleModel->getArticles();
 
-        $orderId = $this->loadModel('OrderModel')->create();
+        $articlePrice = $articleModel->getArticleById($articleId);
 
-        $orderPos = $this->loadModel('OrderPositionModel')->create($_POST['article-id'], $orderId);
+        $order = $this->loadModel('OrderModel');
+        $orderId = $order->create();
+
+        $orderPos = $this->loadModel('OrderPositionModel')->create($articleId, $orderId);
 
         function preg_grep_keys($pattern, $input) {
             $keys = preg_grep($pattern, array_keys($input));
@@ -64,16 +70,27 @@ class ShopController extends Controller
             }
             return $values;
         }
-
-        $filteredOrderContents = preg_grep_keys('/content-id/i', $_POST);
-        
+        $contentIds = preg_grep_keys('/content-id/i', $_POST);
         $orderConfig = $this->loadModel('OrderConfigurationModel');
 
-        foreach ($filteredOrderContents as $contentId) {
+        foreach ($contentIds as $contentId) {
             $orderConfig->create($orderPos, $contentId);
         }
 
+        $items = $order->getOrderedContentsById($orderId);
+        $sumItems = 0;
+
         require 'app/views/home/index.php';
+
+        // price calculation prototype
+        echo $articlePrice[0]->name.": <strong>".$articlePrice[0]->price."</strong><br>";
+        foreach ($items as $item) {
+            echo $item->name.": <strong>".$item->price."</strong><br>";
+
+            $sumItems += $item->price;
+        }
+
+        echo "Summe: <strong>".number_format($sumItems+$articlePrice[0]->price, 2,'.', '')."</strong>";
     }
 
 }

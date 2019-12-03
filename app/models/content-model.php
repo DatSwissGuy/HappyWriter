@@ -22,7 +22,7 @@ class ContentModel
     }
 
     public function getContentsByConfiguration(int $articleId) {
-        $sql = "SELECT * FROM content LEFT JOIN configuration 
+        $sql = "SELECT content.id, content.name, content.description, content.price, content.icon FROM content JOIN configuration 
                 ON content.id = configuration.content_id 
                 WHERE configuration.article_id = :articleId";
         $query = $this->db->prepare($sql);

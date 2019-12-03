@@ -30,4 +30,22 @@ class OrderModel
         return $this->db->lastInsertId();
     }
 
+    public function getOrderedContentsById(int $orderId) {
+        $sql = "SELECT `order_configuration`.`content_id`, `content`.`name`, `content`.`price` FROM order_configuration
+                JOIN `order_position` ON `order_position`.`id` = `order_configuration`.`order_position_id`
+                JOIN `order` ON `order`.`id` = `order_position`.`order_id`
+                JOIN `content` ON `content`.`id` = `order_configuration`.`content_id`
+                WHERE `order`.`id` = :orderId";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+        $query->execute();
+
+        $data = $query->fetchAll();
+
+        return $data;
+    }
+
+    public function getPriceOfSelectedArticle(int $articleId) {
+        $sql = "SELECT `article.price`";
+    }
 }

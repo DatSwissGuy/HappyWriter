@@ -42,6 +42,4 @@ class ArticleModel
         $query->bindParam(':price', $price, PDO::PARAM_STR);
         $query->bindParam(':icon', $icon, PDO::PARAM_STR);
     }
-
-
 }
