@@ -69,7 +69,7 @@
         <input type="hidden" name="zipcode" value="<?php echo $customer->zipcode ?>">
         <input type="hidden" name="telephone" value="<?php echo $customer->telephone ?>">
         <input type="hidden" name="annotations" value="<?php echo $order->annotations ?>">
-        <input type="hidden" name="order-id" value="<?php echo $orderId ?>">
+        <input type="hidden" name="order-id" value="<?php echo /** @var Order $orderId */ $orderId ?>">
         <button type="submit">Best&auml;tigen</button>
     </form>
 </div>
