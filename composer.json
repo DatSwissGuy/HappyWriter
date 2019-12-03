@@ -1,0 +1,16 @@
+{
+    "name": "happywriter/happywriter",
+    "description": "HappyWriter Project",
+    "type": "project",
+    "require": {
+        "twbs/bootstrap": "^4.3",
+        "components/jquery": "^3.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Marti",
+            "email": "christian.marti@liip.ch"
+        }
+    ]
+}
