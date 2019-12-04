@@ -14,12 +14,16 @@
 </div>
 <div class="container">
     <form action="/admin/admin_panel" method="post">
-        <label for="username">Vorname</label>
-        <input type="text" name="username" placeholder="Username"><br>
-        <label for="password">Nachname</label>
-        <input type="password" name="password" placeholder="Passwort"><br>
-        <br>
-        <button type="submit">OK</button>
+        <div class="form-group">
+            <label for="username">Benutzername</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername">
+        </div>
+        <div class="form-group">
+            <label for="password">Passwort</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Passwort">
+        </div>
+        <hr>
+        <button class="btn btn-primary" type="submit">Einloggen</button>
     </form>
 </div>
 </body>

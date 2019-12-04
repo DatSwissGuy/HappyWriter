@@ -15,23 +15,30 @@
     <h2>Auswahl des Inhalts</h2>
 </div>
 <div class="container">
-    <h3>Gew&auml;hltes Etui: <?php echo /** @var Article $selectedArticle */$selectedArticle[0]->name ?></h3>
+    <h3>Gew&auml;hltes Etui: <?php echo /** @var Article $selectedArticle */
+        $selectedArticle[0]->name ?></h3>
 </div>
 <div class="container">
-    <form method="post" action="/shop/order_summary"
-    <h3>Inhalte</h3>
-    <?php
-    /** @var Content[] $contentsForArticle */
-    foreach ($contentsForArticle as $content) {
-        echo "<div>
-                  <input type='checkbox' name='content-id-" . $content->id . "' value='" . $content->id . "'>" . $content->name . "
-              </div>";
-    }
-    ?>
-    <br>
-    <input type="hidden" name="article-id" value="<?php echo $selectedArticle[0]->id ?>">
-    <button type="submit">Best&auml;tigen</button>
+    <form method="post" action="/shop/order_summary">
+        <?php
+        /** @var Content[] $contentsForArticle */
+        foreach ($contentsForArticle as $content) {
+            echo "<div class='form-check'>
+                  <input class='form-check-input' type='checkbox' name='content-id-" . $content->id . "' id='content-id-" . $content->id . "' value='" . $content->id . "'>
+                  <label class='form-check-label' for='content-id-" . $content->id . "'>" . $content->name . "</label>
+                  </div>";
+        }
+        ?>
+        <input type="hidden" name="article-id" value="<?php echo $selectedArticle[0]->id ?>">
+        <hr>
+        <button class="btn btn-danger" type="button" onclick="abort()">Abbrechen</button>
+        <button class="btn btn-primary" type="submit" >Best&auml;tigen</button>
     </form>
 </div>
+<script>
+    function abort() {
+        window.location.href = '/';
+    }
+</script>
 </body>
 </html>

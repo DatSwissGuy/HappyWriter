@@ -45,7 +45,7 @@
         echo "Summe: <strong>".number_format($sumContents+$articleById[0]->price, 2,'.', '')."</strong>";
         echo "<hr>";
         echo "<form action='/customer/new_customer/' method='post'>
-              <button type='submit'>Bestellen</button>
+              <button type='submit' class='btn btn-primary'>Bestellen</button>
               <input type='hidden' name='order-id' value='{$orderId}'>
               </form>";
     }

@@ -62,7 +62,6 @@
         echo $order->annotations
         ?>
     </p>
-    <br>
     <form action="/shop/order_complete" method="post">
         <input type="hidden" name="first-name" value="<?php echo $customer->firstname ?>">
         <input type="hidden" name="last-name" value="<?php echo $customer->lastname ?>">
@@ -72,8 +71,15 @@
         <input type="hidden" name="telephone" value="<?php echo $customer->telephone ?>">
         <input type="hidden" name="annotations" value="<?php echo $order->annotations ?>">
         <input type="hidden" name="order-id" value="<?php echo /** @var Order $orderId */ $orderId ?>">
-        <button type="submit">Best&auml;tigen</button>
+        <hr>
+        <button class="btn btn-danger" type="button" onclick="goBack()">Zurück</button>
+        <button class="btn btn-primary" type="submit" >Best&auml;tigen</button>
     </form>
 </div>
+<script>
+    function goBack() {
+        history.back();
+    }
+</script>
 </body>
 </html>
