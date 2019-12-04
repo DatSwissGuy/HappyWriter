@@ -4,17 +4,21 @@ class CustomerController extends Controller
 
 {
 
-    public function new_customer() {
+    public function index() {
+        header('Location: /');
+    }
 
+    public function new_customer() {
         require 'app/models/Order.php';
 
-        if (isset($_POST['order-id'])) {
+        if (!empty($_POST['order-id'])) {
             $orderId = htmlentities($_POST['order-id'], ENT_QUOTES, 'UTF-8');
+            $order = new Order;
+            $order->id = $orderId;
+            require 'app/views/customer/new-customer.php';
+        } else {
+            header('Location: /');
         }
-        $order = new Order;
-        $order->id = $orderId;
-
-        require 'app/views/customer/new-customer.php';
     }
 
     public function verify_customer() {
@@ -25,7 +29,11 @@ class CustomerController extends Controller
         $street = null;
         $zipcode = null;
         $telephone = null;
-        $orderId = null;
+        $annotations = null;
+
+        if (empty($_POST['order-id'])) {
+            header('Location: /');
+        };
 
         if (isset($_POST['first-name'])) {
             $firstName = htmlentities($_POST['first-name'], ENT_QUOTES, 'UTF-8');

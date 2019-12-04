@@ -60,7 +60,7 @@ class Application
             $this->url_parameter_2 = (isset($url[3]) ? $url[3] : null);
             $this->url_parameter_3 = (isset($url[4]) ? $url[4] : null);
 
-//            // for debugging. uncomment this
+            // for debugging. uncomment this
 //            echo 'Controller: ' .  str_replace(' ', '', ucwords(str_replace('-', ' ', $this->url_controller))) . '<br />';
 //            echo 'Action: ' . ($this->url_action ? $this->url_action : 'index') . '<br />';
 //            echo 'Parameter 1: ' . $this->url_parameter_1 . '<br />';

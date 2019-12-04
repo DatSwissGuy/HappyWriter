@@ -22,14 +22,21 @@ class ShopController extends Controller
     }
 
     public function content() {
-        /** @var ArticleModel $articleModel */
-        $articleModel = $this->loadModel('ArticleModel');
-        $selectedArticle = $articleModel->getArticleById($this->app->getParameter1());
+        $urlParam = $this->app->getParameter1();
 
-        $contentModel = $this->loadModel('ContentModel');
-        $contentsForArticle = $contentModel->getContentsByConfiguration($this->app->getParameter1());
+        if (!empty($urlParam)) {
+            /** @var ArticleModel $articleModel */
+            $articleModel = $this->loadModel('ArticleModel');
+            $selectedArticle = $articleModel->getArticleById($urlParam);
 
-        require 'app/views/shop/content.php';
+            /** @var ContentModel $contentModel */
+            $contentModel = $this->loadModel('ContentModel');
+            $contentsForArticle = $contentModel->getContentsByConfiguration($urlParam);
+
+            require 'app/views/shop/content.php';
+        } else {
+            header('Location: /');
+        }
     }
 
     public function order_complete() {
@@ -97,44 +104,49 @@ class ShopController extends Controller
         $metadataModel = $this->loadModel('MetadataModel');
         $metadata = $metadataModel->getMetadata();
 
+        if (!empty($_POST['article-id'])) {
+            $articleId = (int)htmlentities($_POST['article-id'], ENT_QUOTES, 'UTF-8');
 
-        $articleId = (int)htmlentities($_POST['article-id'], ENT_QUOTES, 'UTF-8');
-        /** @var ArticleModel $articleModel */
-        $articleModel = $this->loadModel('ArticleModel');
-        $articles = $articleModel->getArticles();
-        $articleById = $articleModel->getArticleById($articleId);
+            /** @var ArticleModel $articleModel */
+            $articleModel = $this->loadModel('ArticleModel');
+            $articles = $articleModel->getArticles();
+            $articleById = $articleModel->getArticleById($articleId);
 
-        /** @var OrderModel $orderModel */
-        $orderModel = $this->loadModel('OrderModel');
-        $orderId = $orderModel->create();
+            /** @var OrderModel $orderModel */
+            $orderModel = $this->loadModel('OrderModel');
+            $orderId = $orderModel->create();
 
-        /** @var OrderPositionModel $orderPosModel */
-        $orderPosModel = $this->loadModel('OrderPositionModel');
-        $orderPos= $orderPosModel->create($articleId, $orderId);
+            /** @var OrderPositionModel $orderPosModel */
+            $orderPosModel = $this->loadModel('OrderPositionModel');
+            $orderPos = $orderPosModel->create($articleId, $orderId);
 
-        // TODO move function to a better place
-        function preg_grep_keys($pattern, $input) {
-            $keys = preg_grep($pattern, array_keys($input));
-            $values = [];
-            foreach ($keys as $key) {
-                $values[$key] = $input[$key];
+            // TODO move function to a better place
+            function preg_grep_keys($pattern, $input) {
+                $keys = preg_grep($pattern, array_keys($input));
+                $values = [];
+                foreach ($keys as $key) {
+                    $values[$key] = $input[$key];
+                }
+                return $values;
             }
-            return $values;
+
+            $contentIds = preg_grep_keys('/content-id/i', $_POST);
+
+            /** @var OrderConfigurationModel $orderConfigModel */
+            $orderConfigModel = $this->loadModel('OrderConfigurationModel');
+
+            foreach ($contentIds as $contentId) {
+                $orderConfigModel->create($orderPos, $contentId);
+            }
+
+            $orderContents = $orderModel->getOrderedContentsById($orderId);
+            $sumContents = 0;
+
+            require 'app/views/home/index.php';
+        } else {
+            header('Location: /');
         }
 
-        $contentIds = preg_grep_keys('/content-id/i', $_POST);
-
-        /** @var OrderConfigurationModel $orderConfigModel */
-        $orderConfigModel = $this->loadModel('OrderConfigurationModel');
-
-        foreach ($contentIds as $contentId) {
-            $orderConfigModel->create($orderPos, $contentId);
-        }
-
-        $orderContents = $orderModel->getOrderedContentsById($orderId);
-        $sumContents = 0;
-
-        require 'app/views/home/index.php';
     }
 
 }

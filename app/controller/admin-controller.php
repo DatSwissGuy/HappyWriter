@@ -23,7 +23,7 @@ class AdminController extends Controller
             setcookie('admin','$aSBoYXRlIHRoaXMgcHJvamVjdA==$', time() + 3599, '/');
             require 'app/views/admin/admin-panel.php';
         } else {
-            require 'app/views/admin/login.php';
+            header('Location: /admin');
 
         }
     }
