@@ -41,18 +41,61 @@ class ShopController extends Controller
     }
 
     public function thankyou() {
+
+        $firstName = null;
+        $lastName = null;
+        $city = null;
+        $street = null;
+        $zipcode = null;
+        $telephone = null;
+        $orderId = null;
+
+        if (isset($_POST['first-name'])) {
+            $firstName = htmlentities($_POST['first-name'], ENT_QUOTES, 'UTF-8');
+        }
+
+        if (isset($_POST['last-name'])) {
+            $lastName = htmlentities($_POST['last-name'], ENT_QUOTES, 'UTF-8');
+        }
+
+        if (isset($_POST['city'])) {
+            $city = htmlentities($_POST['city'], ENT_QUOTES, 'UTF-8');
+        }
+
+        if (isset($_POST['street'])) {
+            $street = htmlentities($_POST['street'], ENT_QUOTES, 'UTF-8');
+        }
+
+        if (isset($_POST['zipcode'])) {
+            $zipcode = (int)htmlentities($_POST['zipcode'], ENT_QUOTES, 'UTF-8');
+        }
+
+        if (isset($_POST['telephone'])) {
+            $telephone = htmlentities($_POST['telephone'], ENT_QUOTES, 'UTF-8');
+        }
+
+        if (isset($_POST['annotations'])) {
+            $annotations = htmlentities($_POST['annotations'], ENT_QUOTES, 'UTF-8');
+        }
+
+        if (isset($_POST['order-id'])) {
+            $orderId = (int)htmlentities($_POST['order-id'], ENT_QUOTES, 'UTF-8');
+        }
+
+        /** @var CustomerModel $customerModel */
         $customerModel = $this->loadModel('CustomerModel');
         $customerId = $customerModel->registerCustomer(
-            $_POST['first-name'],
-            $_POST['last-name'],
-            $_POST['city'],
-            $_POST['street'],
-            $_POST['zipcode'],
-            $_POST['telephone']
+            $firstName,
+            $lastName,
+            $city,
+            $street,
+            $zipcode,
+            $telephone
         );
 
+        /** @var OrderModel $orderModel */
         $orderModel = $this->loadModel('OrderModel');
-        $updateOrder = $orderModel->updateCurrentOrder($customerId, $_POST['order-id'], $_POST['annotations']);
+        $updateOrder = $orderModel->updateCurrentOrder($customerId, $orderId, $annotations);
 
         require 'app/views/shop/thankyou.php';
     }
@@ -62,7 +105,8 @@ class ShopController extends Controller
         $metadataModel = $this->loadModel('MetadataModel');
         $metadata = $metadataModel->getMetadata();
 
-        $articleId = $_POST['article-id'];
+
+        $articleId = (int)htmlentities($_POST['article-id'], ENT_QUOTES, 'UTF-8');
         /** @var ArticleModel $articleModel */
         $articleModel = $this->loadModel('ArticleModel');
         $articles = $articleModel->getArticles();
