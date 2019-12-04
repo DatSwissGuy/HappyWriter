@@ -10,19 +10,15 @@
 </head>
 <body>
 <div class="container">
-    <h1>Adminpanel</h1>
-</div>
-<div class="container">
-    <div><a href="/admin/edit_articles">Add Article</a></div>
-    <div><a href="/admin/edit_contents">Add Content</a></div>
+    <h1>Edit / Add new content for articles</h1>
 </div>
 <hr>
 <div class="container">
-    <button class="btn btn-danger" type="button" onclick="logout()">Logout</button>
+    <button class="btn btn-danger" type="button" onclick="goBack()">Zurück</button>
 </div>
 <script>
-    function logout() {
-        window.location.href = '/admin/logout/';
+    function goBack() {
+        window.location.href = '/admin';
     }
 </script>
 </body>
