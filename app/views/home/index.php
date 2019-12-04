@@ -34,11 +34,13 @@
     <?php
     /** @var OrderModel $orderId */
     if ($orderId !== null) {
+        echo "<h2>Deine aktuelle Bestellung</h2>";
+        /** @var Order $articleById */
         echo $articleById[0]->name.": <strong>".$articleById[0]->price."</strong><br>";
-
+        /** @var Content $orderContents */
         foreach ($orderContents as $orderContent) {
             echo $orderContent->name.": <strong>".$orderContent->price."</strong><br>";
-
+            /** @var $sumContents Sum */
             $sumContents += $orderContent->price;
         }
         echo "<hr>";

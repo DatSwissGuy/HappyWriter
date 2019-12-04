@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-    Danke für deine Bestellung!
+    <h1>Danke für deine Bestellung!</h1>
 </div>
 </body>
 </html>
