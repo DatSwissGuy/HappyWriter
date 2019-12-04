@@ -7,6 +7,8 @@
     </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="<?php echo BOOTSTRAP_CSS ?>">
+    <script src="<?php echo BOOTSTRAP_JS ?>"></script>
 </head>
 <body>
 <div class="container">
@@ -16,7 +18,7 @@
     <h3>Gew&auml;hltes Etui: <?php echo /** @var Article $selectedArticle */$selectedArticle[0]->name ?></h3>
 </div>
 <div class="container">
-    <form method="post" action="/shop/toCheckout"
+    <form method="post" action="/shop/order_summary"
     <h3>Inhalte</h3>
     <?php
     /** @var Content[] $contentsForArticle */

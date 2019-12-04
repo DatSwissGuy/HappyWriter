@@ -21,14 +21,6 @@ class ShopController extends Controller
         require 'app/views/home/index.php';
     }
 
-    public function article() {
-        /** @var ArticleModel $articleModel */
-        $articleModel = $this->loadModel('ArticleModel');
-        $articles = $articleModel->loadModel('ArticleModel')->getArticles();
-
-        require 'app/views/shop/article.php';
-    }
-
     public function content() {
         /** @var ArticleModel $articleModel */
         $articleModel = $this->loadModel('ArticleModel');
@@ -40,7 +32,7 @@ class ShopController extends Controller
         require 'app/views/shop/content.php';
     }
 
-    public function thankyou() {
+    public function order_complete() {
 
         $firstName = null;
         $lastName = null;
@@ -97,10 +89,10 @@ class ShopController extends Controller
         $orderModel = $this->loadModel('OrderModel');
         $updateOrder = $orderModel->updateCurrentOrder($customerId, $orderId, $annotations);
 
-        require 'app/views/shop/thankyou.php';
+        require 'app/views/shop/order-complete.php';
     }
 
-    public function toCheckout() {
+    public function order_summary() {
         /** @var MetadataModel $metadataModel */
         $metadataModel = $this->loadModel('MetadataModel');
         $metadata = $metadataModel->getMetadata();
@@ -143,16 +135,6 @@ class ShopController extends Controller
         $sumContents = 0;
 
         require 'app/views/home/index.php';
-
-        // TODO move some parts to view
-        echo $articleById[0]->name.": <strong>".$articleById[0]->price."</strong><br>";
-        foreach ($orderContents as $orderContent) {
-            echo $orderContent->name.": <strong>".$orderContent->price."</strong><br>";
-
-            $sumContents += $orderContent->price;
-        }
-
-        echo "Summe: <strong>".number_format($sumContents+$articleById[0]->price, 2,'.', '')."</strong>";
     }
 
 }

@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="<?php echo BOOTSTRAP_CSS ?>">
+    <script src="<?php echo BOOTSTRAP_JS ?>"></script>
 </head>
 <body>
 <div class="container">
@@ -61,7 +63,7 @@
         ?>
     </p>
     <br>
-    <form action="/shop/thankyou" method="post">
+    <form action="/shop/order_complete" method="post">
         <input type="hidden" name="first-name" value="<?php echo $customer->firstname ?>">
         <input type="hidden" name="last-name" value="<?php echo $customer->lastname ?>">
         <input type="hidden" name="street" value="<?php echo $customer->street ?>">

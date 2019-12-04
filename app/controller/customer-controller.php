@@ -7,8 +7,12 @@ class CustomerController extends Controller
     public function new_customer() {
 
         require 'app/models/Order.php';
+
+        if (isset($_POST['order-id'])) {
+            $orderId = htmlentities($_POST['order-id'], ENT_QUOTES, 'UTF-8');
+        }
         $order = new Order;
-        $order->id = $this->app->getParameter1();
+        $order->id = $orderId;
 
         require 'app/views/customer/new-customer.php';
     }
