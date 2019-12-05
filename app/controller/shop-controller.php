@@ -24,7 +24,7 @@ class ShopController extends Controller
     public function content() {
         $urlParam = $this->app->getParameter1();
 
-        if (!empty($urlParam)) {
+        if (!empty($urlParam < 3 && $urlParam > 0 )) {
             /** @var ArticleModel $articleModel */
             $articleModel = $this->loadModel('ArticleModel');
             $selectedArticle = $articleModel->getArticleById($urlParam);
@@ -40,6 +40,10 @@ class ShopController extends Controller
     }
 
     public function order_complete() {
+
+        if (empty($_POST['order-id'])) {
+            header('Location: /');
+        }
 
         $firstName = null;
         $lastName = null;
