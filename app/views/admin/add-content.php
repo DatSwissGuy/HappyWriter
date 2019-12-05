@@ -1,4 +1,3 @@
-<!-- TODO remove this feature, not required -->
 <!DOCTYPE html>
 <html lang="de-CH">
 <head>
@@ -6,19 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etui-Inhalte hinzufügen</title>
     <link rel="stylesheet" type="text/css" href="<?php echo BOOTSTRAP_CSS ?>">
     <script src="<?php echo BOOTSTRAP_JS ?>"></script>
 </head>
 <body>
 <div class="container">
-    <h1>Neuen Artikel hinzufügen</h1>
+    <h1>Neuen Etui-Inhalt hinzufügen</h1>
 </div>
 <div class="container">
-    <form class="needs-validation" action="/admin/add_article" method="post" novalidate>
+    <form class="needs-validation" action="/admin/add_content" method="post" novalidate>
         <div class="form-row">
             <div class="form-group col">
-                <label for="name">Artikelname</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Artikelname" required>
+                <label for="name">Produktname</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Produktname" required>
             </div>
             <div class="form-group col">
                 <label for="price">Preis</label>
@@ -36,17 +36,25 @@
                           required></textarea>
             </div>
         </div>
+        <p>Verfügbarkeit für folgende Artikel:</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="article-1" name="article-id-1" value="1">
+            <label class="form-check-label" for="article-1">Holzetui</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="article-2" name="article-id-2" value="2">
+            <label class="form-check-label" for="article-2">Stoffetui</label>
+        </div>
+        <hr>
+        <button class="btn btn-danger" type="button" onclick="goBack()">Zurück</button>
+        <button class="btn btn-primary" type="submit">Inhalt anlegen</button>
+    </form>
 </div>
-<hr>
-<div class="container">
-    <button class="btn btn-danger" type="button" onclick="goBack()">Zurück</button>
-    <button class="btn btn-primary" type="submit">Artikel anlegen</button>
-</div>
-</form>
 <script>
     (function () {
         window.addEventListener('load', function () {
             let forms = document.getElementsByClassName('needs-validation');
+            let number = document.getElementById('price');
             let validation = Array.prototype.filter.call(forms, function (form) {
                 form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
@@ -57,7 +65,7 @@
                 }, false);
             });
         }, false);
-    }) ();
+    })();
 
     function goBack() {
         window.location.href = '/admin';

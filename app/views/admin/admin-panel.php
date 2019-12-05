@@ -14,7 +14,8 @@
     <h1>Adminpanel</h1>
 </div>
 <div class="container">
-    <div><a href="/admin/edit_contents">Etui-Inhalt hinzufügen</a></div>
+    <div><a href="/admin/add_content">Etui-Inhalt hinzufügen</a></div>
+    <div><a href="/admin/edit_contents">Etui-Inhalte bearbeiten</a></div>
 </div>
 <hr>
 <div class="container">

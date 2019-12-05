@@ -54,7 +54,7 @@ CREATE TABLE `configuration`
     KEY `article_id` (`article_id`),
     KEY `content_id` (`content_id`),
     CONSTRAINT `configuration_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-    CONSTRAINT `configuration_ibfk_2` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
+    CONSTRAINT `configuration_ibfk_2` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -120,5 +120,6 @@ CREATE TABLE `order_configuration`
     KEY `content_id` (`content_id`),
     FOREIGN KEY (`order_position_id`) REFERENCES `order_position` (`id`),
     FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
+    ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

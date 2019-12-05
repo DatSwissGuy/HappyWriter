@@ -1,7 +1,10 @@
 <?php
 
+require 'app/models/Configuration.php';
+
 class ConfigurationModel
 {
+
 
     function __construct($db) {
         try {
@@ -12,12 +15,19 @@ class ConfigurationModel
     }
 
     public function getConfiguration() {
-        $sql = "SELECT * FROM order";
+        $sql = "SELECT * FROM configuration";
         $query = $this->db->prepare($sql);
         $query->execute();
-
         $data = $query->fetchAll(PDO::FETCH_CLASS, 'Configuration');
+        return $data;
+    }
 
+    public function getConfigByContentId($configId) {
+        $sql = "SELECT * FROM configuration WHERE content_id = :configId";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':configId', $configId, PDO::PARAM_INT);
+        $query->execute();
+        $data = $query->fetchAll(PDO::FETCH_CLASS, 'Configuration');
         return $data;
     }
 
@@ -27,8 +37,6 @@ class ConfigurationModel
         $query = $this->db->prepare($sql);
         $query->bindParam(':articleId', $articleId, PDO::PARAM_STR);
         $query->bindParam(':contentId', $contentId, PDO::PARAM_STR);
-
         $query->execute();
     }
-
 }

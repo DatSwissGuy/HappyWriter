@@ -15,9 +15,16 @@ class ContentModel
         $sql = "SELECT * FROM content";
         $query = $this->db->prepare($sql);
         $query->execute();
-
         $data = $query->fetchAll(PDO::FETCH_CLASS, 'Content');
+        return $data;
+    }
 
+    public function getContentById($id) {
+        $sql = "SELECT * FROM content WHERE id = :id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+        $data = $query->fetchAll(PDO::FETCH_CLASS, 'Content');
         return $data;
     }
 
@@ -28,12 +35,20 @@ class ContentModel
         $query = $this->db->prepare($sql);
         $query->bindParam(':articleId', $articleId, PDO::PARAM_INT);
         $query->execute();
-
         $data = $query->fetchAll(PDO::FETCH_CLASS, 'Content');
-
         return $data;
+    }
 
-
+    public function updateById(int $id, string $name, string $description, float $price, string $icon) {
+        $sql = "UPDATE content SET name = :name, description = :description, price = :price, icon = :icon WHERE id = :id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->bindParam(':description', $description, PDO::PARAM_STR);
+        $query->bindParam(':price', $price, PDO::PARAM_STR);
+        $query->bindParam(':icon', $icon, PDO::PARAM_STR);
+        $query->execute();
+        return $this->db->lastInsertId();
     }
 
     public function add(string $name, string $description, float $price, string $icon) {
@@ -44,10 +59,15 @@ class ContentModel
         $query->bindParam(':description', $description, PDO::PARAM_STR);
         $query->bindParam(':price', $price, PDO::PARAM_STR);
         $query->bindParam(':icon', $icon, PDO::PARAM_STR);
-
         $query->execute();
-
         return $this->db->lastInsertId();
+    }
+
+    public function delete(int $id) {
+        $sql = "DELETE FROM `content` WHERE id = :id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->execute();
     }
 
 }
