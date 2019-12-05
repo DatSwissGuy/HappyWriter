@@ -37,20 +37,18 @@
         </div>
         <p>Verfügbarkeit für folgende Artikel:</p>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="article-1" value="article-1">
+            <input class="form-check-input" type="checkbox" id="article-1" name="article-id-1" value="1">
             <label class="form-check-label" for="article-1">Holzetui</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="article-2" value="article-2">
+            <input class="form-check-input" type="checkbox" id="article-2" name="article-id-2" value="2">
             <label class="form-check-label" for="article-2">Stoffetui</label>
         </div>
-</div>
-    <hr>
-    <div class="container">
+        <hr>
         <button class="btn btn-danger" type="button" onclick="goBack()">Zurück</button>
         <button class="btn btn-primary" type="submit">Inhalt anlegen</button>
-    </div>
-</form>
+    </form>
+</div>
 <script>
     (function () {
         window.addEventListener('load', function () {
@@ -66,7 +64,7 @@
                 }, false);
             });
         }, false);
-    }) ();
+    })();
 
     function goBack() {
         window.location.href = '/admin';

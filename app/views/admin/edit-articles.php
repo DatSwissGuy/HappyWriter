@@ -1,3 +1,4 @@
+<!-- TODO remove this feature, not required -->
 <!DOCTYPE html>
 <html lang="de-CH">
 <head>

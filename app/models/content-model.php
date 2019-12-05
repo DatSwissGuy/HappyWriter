@@ -46,6 +46,8 @@ class ContentModel
         $query->bindParam(':icon', $icon, PDO::PARAM_STR);
 
         $query->execute();
+
+        return $this->db->lastInsertId();
     }
 
 }
