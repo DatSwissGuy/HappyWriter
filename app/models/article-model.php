@@ -33,8 +33,7 @@ class ArticleModel
         return $data;
     }
 
-    // TODO needed for future admin panel
-    public function insertIntoArticle(string $name, string $description, float $price, string $icon) {
+    public function add(string $name, string $description, float $price, string $icon) {
         $sql = "INSERT INTO article (name, description, price, icon) 
                 VALUES (:name, :description, :price, :icon)";
         $query = $this->db->prepare($sql);
@@ -42,5 +41,8 @@ class ArticleModel
         $query->bindParam(':description', $description, PDO::PARAM_STR);
         $query->bindParam(':price', $price, PDO::PARAM_STR);
         $query->bindParam(':icon', $icon, PDO::PARAM_STR);
+
+        $query->execute();
     }
+
 }

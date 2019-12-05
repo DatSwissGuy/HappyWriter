@@ -35,8 +35,8 @@ class ContentModel
 
 
     }
-    // TODO needed for future admin panel
-    public function insertIntoContent(string $name, string $description, float $price, string $icon) {
+
+    public function add(string $name, string $description, float $price, string $icon) {
         $sql = "INSERT INTO content (name, description, price, icon) 
                 VALUES (:name, :description, :price, :icon)";
         $query = $this->db->prepare($sql);
