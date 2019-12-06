@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kundenregistrierung</title>
     <link rel="stylesheet" type="text/css" href="<?php echo BOOTSTRAP_CSS ?>">
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <script src="<?php echo BOOTSTRAP_JS ?>"></script>
 </head>
 <body>
 <div class="container">
-    <h1>Gib deine Personalien an</h1>
+    <h2>Gib deine Personalien an</h2>
 </div>
 <div class="container">
-    <form class="needs-validation" action="/customer/verify_customer" method="post" novalidate>
+    <form class="needs-validation" action="/customer/verify_customer" name="form" method="post" novalidate>
         <div class="form-row">
             <div class="form-group col">
                 <label for="first-name">Vorname</label>
@@ -39,11 +40,11 @@
         <div class="form-row">
             <div class="form-group col">
                 <label for="zipcode">Postleitzahl</label>
-                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Postleitzahl" required>
+                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Postleitzahl" pattern="^[1-9]\d{3}" required>
             </div>
             <div class="form-group col">
-                <label for="telephone">Telefonnummer</label>
-                <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Telefonnumer" required>
+                <label for="telephone">Telefonnummer (ohne Landesvorwahl, 10 Ziffern)</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Telefonnummer" pattern="^\d{10}" required>
             </div>
         </div>
         <div class="form-group">
@@ -72,7 +73,7 @@
             });
         }, false);
     }) ();
-    
+
     function goBack() {
         history.back();
     }

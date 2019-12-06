@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Danke für deine Bestellung!</h1>
+    <h2>Danke für deine Bestellung!</h2>
     <img src="/public/assets/images/logo.jpg">
 </div>
 </body>

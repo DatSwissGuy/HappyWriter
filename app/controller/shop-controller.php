@@ -144,22 +144,24 @@ class ShopController extends Controller
             foreach ($contentIds as $contentId) {
                 $orderConfigModel->create($orderPos, $contentId);
             }
-
+            /** @var OrderModel $orderContents */
             $orderContents = $orderModel->getOrderedContentsById($orderId);
             $sumContents = 0;
             require 'app/views/home/index.php';
         } else {
             header('Location: /');
         }
-
     }
 
     public function abort() {
+        session_start();
         if (isset($_POST['order-id'])) {
             $orderId = htmlentities($_POST['order-id'], ENT_QUOTES, 'UTF-8');
         }
+        /** @var OrderModel $orderContents */
         $orderModel = $this->loadModel('OrderModel');
         $deleteOrder = $orderModel->delete($orderId);
+        session_destroy();
         header('Location: /');
     }
 

@@ -37,7 +37,7 @@
     <?php
     /** @var OrderModel $orderId */
     if ($orderId !== null) {
-        echo "<h2>Deine aktuelle Bestellung</h2>";
+        echo "<h3>Deine aktuelle Bestellung:</h3>";
         /** @var Order $articleById */
         echo $articleById[0]->name . ": <strong>" . $articleById[0]->price . "</strong><br>";
         /** @var Content $orderContents */

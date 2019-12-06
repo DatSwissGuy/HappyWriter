@@ -21,8 +21,8 @@
                 <input type="text" class="form-control" id="name" name="name" placeholder="Produktname" required>
             </div>
             <div class="form-group col">
-                <label for="price">Preis</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="Preis" required>
+                <label for="price">Preis (auf zwei Nachkommastellen eingeben)</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="Preis" pattern="^\d{1,3}.?\d{1}?(0|5)" required>
             </div>
             <div class="form-group col">
                 <label for="icon">Bild</label>

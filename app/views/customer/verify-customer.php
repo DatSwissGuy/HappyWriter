@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Bestätige deine Angaben</h1>
+    <h2>Bestätige deine Angaben</h2>
 </div>
 <div class="container">
     <p>

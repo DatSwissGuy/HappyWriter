@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Auswahl des Inhalts</h2>
+    <h1>Auswahl des Inhalts</h1>
 </div>
 <div class="container">
     <h3>Gew&auml;hltes Etui: <?php echo /** @var Article $selectedArticle */
