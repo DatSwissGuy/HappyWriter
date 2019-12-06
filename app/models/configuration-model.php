@@ -35,8 +35,16 @@ class ConfigurationModel
         $sql = "INSERT INTO configuration (article_id, content_id) 
                 VALUES (:articleId, :contentId)";
         $query = $this->db->prepare($sql);
-        $query->bindParam(':articleId', $articleId, PDO::PARAM_STR);
-        $query->bindParam(':contentId', $contentId, PDO::PARAM_STR);
+        $query->bindParam(':articleId', $articleId, PDO::PARAM_INT);
+        $query->bindParam(':contentId', $contentId, PDO::PARAM_INT);
         $query->execute();
+    }
+
+    public function update(int $articleId, int $contentId) {
+        $sql = "DELETE FROM configuration WHERE content_id = :contentId";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':contentId', $articleId, PDO::PARAM_INT);
+        $query->execute();
+        $this->add($articleId, $contentId);
     }
 }
