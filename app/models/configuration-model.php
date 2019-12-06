@@ -40,11 +40,10 @@ class ConfigurationModel
         $query->execute();
     }
 
-    public function update(int $articleId, int $contentId) {
+    public function delete(int $contentId) {
         $sql = "DELETE FROM configuration WHERE content_id = :contentId";
         $query = $this->db->prepare($sql);
-        $query->bindParam(':contentId', $articleId, PDO::PARAM_INT);
+        $query->bindParam(':contentId', $contentId, PDO::PARAM_INT);
         $query->execute();
-        $this->add($articleId, $contentId);
     }
 }

@@ -165,13 +165,14 @@ class AdminController extends Controller
             $contentUpdate = $contentModel->updateById($contentId, $name, $description, $price, $icon);
 
             $configModel = $this->loadModel('ConfigurationModel');
+            $configModel->delete($contentId);
             if (isset($_POST['article-id-1'])) {
                 $article1 = htmlentities($_POST['article-id-1'], ENT_QUOTES, 'UTF-8');
-                $configModel->update($article1, $contentId);
+                $configModel->add($article1, $contentId);
             }
             if (isset($_POST['article-id-2'])) {
                 $article2 = htmlentities($_POST['article-id-2'], ENT_QUOTES, 'UTF-8');
-                $configModel->update($article2, $contentId);
+                $configModel->add($article2, $contentId);
             }
 
             header('Location: /admin/edit_contents');
