@@ -54,7 +54,6 @@
     (function () {
         window.addEventListener('load', function () {
             let forms = document.getElementsByClassName('needs-validation');
-            let number = document.getElementById('price');
             let validation = Array.prototype.filter.call(forms, function (form) {
                 form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {

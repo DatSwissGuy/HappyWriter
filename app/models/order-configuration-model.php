@@ -2,7 +2,6 @@
 
 class OrderConfigurationModel
 {
-
     function __construct($db) {
         try {
             $this->db = $db;

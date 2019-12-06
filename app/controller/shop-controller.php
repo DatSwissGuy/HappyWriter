@@ -7,6 +7,7 @@ class ShopController extends Controller
 {
 
     public function index() {
+        session_start();
         /** @var MetadataModel $metadataModel */
         $metadataModel = $this->loadModel('MetadataModel');
         $metadata = $metadataModel->getMetadata();
@@ -15,13 +16,12 @@ class ShopController extends Controller
         $articleModel = $this->loadModel('ArticleModel');
         $articles = $articleModel->getArticles();
 
-        // Initialize order on first call of page
         $orderId = null;
-
         require 'app/views/home/index.php';
     }
 
     public function content() {
+        session_start();
         $urlParam = $this->app->getParameter1();
 
         if (!empty($urlParam < 3 && $urlParam > 0 )) {
@@ -40,6 +40,7 @@ class ShopController extends Controller
     }
 
     public function order_complete() {
+        session_start();
 
         if (empty($_POST['order-id'])) {
             header('Location: /');
@@ -99,11 +100,12 @@ class ShopController extends Controller
         /** @var OrderModel $orderModel */
         $orderModel = $this->loadModel('OrderModel');
         $updateOrder = $orderModel->updateCurrentOrder($customerId, $orderId, $annotations);
-
         require 'app/views/shop/order-complete.php';
     }
 
     public function order_summary() {
+        session_start();
+
         /** @var MetadataModel $metadataModel */
         $metadataModel = $this->loadModel('MetadataModel');
         $metadata = $metadataModel->getMetadata();
@@ -145,12 +147,20 @@ class ShopController extends Controller
 
             $orderContents = $orderModel->getOrderedContentsById($orderId);
             $sumContents = 0;
-
             require 'app/views/home/index.php';
         } else {
             header('Location: /');
         }
 
+    }
+
+    public function abort() {
+        if (isset($_POST['order-id'])) {
+            $orderId = htmlentities($_POST['order-id'], ENT_QUOTES, 'UTF-8');
+        }
+        $orderModel = $this->loadModel('OrderModel');
+        $deleteOrder = $orderModel->delete($orderId);
+        header('Location: /');
     }
 
 }

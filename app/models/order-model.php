@@ -15,9 +15,7 @@ class OrderModel
         $sql = "SELECT * FROM order";
         $query = $this->db->prepare($sql);
         $query->execute();
-
         $data = $query->fetchAll(PDO::FETCH_CLASS, 'Order');
-
         return $data;
     }
 
@@ -26,7 +24,6 @@ class OrderModel
                 VALUES (NULL, NULL)";
         $query = $this->db->prepare($sql);
         $query->execute();
-
         return $this->db->lastInsertId();
     }
 
@@ -39,9 +36,7 @@ class OrderModel
         $query = $this->db->prepare($sql);
         $query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
         $query->execute();
-
         $data = $query->fetchAll();
-
         return $data;
     }
 
@@ -52,6 +47,13 @@ class OrderModel
         $query->bindParam(':customerId', $customerId, PDO::PARAM_INT);
         $query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
         $query->bindParam(':annotations', $annotations, PDO::PARAM_STR);
+        $query->execute();
+    }
+
+    public function delete(int $orderId) {
+        $sql = "DELETE FROM `order` WHERE `id` = :orderId";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
         $query->execute();
     }
 }

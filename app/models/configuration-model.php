@@ -4,8 +4,6 @@ require 'app/models/Configuration.php';
 
 class ConfigurationModel
 {
-
-
     function __construct($db) {
         try {
             $this->db = $db;

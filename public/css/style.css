@@ -1,0 +1,20 @@
+img {
+    width: 105px;
+    height: 75px;
+    object-fit: cover;
+    border: 1px solid #dddddd;
+    margin: 0.25rem;
+}
+
+img.article {
+    width: 170px;
+    height: 75px;
+    object-fit: cover;
+    border: 1px solid #dddddd;
+    margin: 0.25rem;
+    opacity: 50%;
+}
+
+img.article:hover {
+    opacity: 100%;
+}

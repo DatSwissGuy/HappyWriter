@@ -15,9 +15,7 @@ class CustomerModel
         $sql = "SELECT * FROM customer";
         $query = $this->db->prepare($sql);
         $query->execute();
-
         $data = $query->fetchAll(PDO::FETCH_CLASS, 'Customer');
-
         return $data;
     }
 
@@ -31,9 +29,7 @@ class CustomerModel
         $query->bindParam(':city', $city, PDO::PARAM_STR);
         $query->bindParam(':zipcode', $zipcode, PDO::PARAM_INT);
         $query->bindParam(':telephone', $telephone, PDO::PARAM_STR);
-
         $query->execute();
-
         return $this->db->lastInsertId();
     }
 

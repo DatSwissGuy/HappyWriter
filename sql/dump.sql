@@ -38,12 +38,14 @@ CREATE TABLE `content`
 
 INSERT INTO `content` (`id`, `name`, `description`, `price`, `icon`)
 VALUES (1, 'Bleistift', 'Ein Bleistift aus Holz', 1.50, 'Bleistift.jpg'),
-       (2, 'Kugelschreiber', 'Ein Kugelschreiber mit schwarzer Tinte', 2.50, 'Kugelschreiber.jpg'),
-       (3, 'Schere', 'Eine kleine Schere, passend fuer jedes Etui', 5.50, 'Schere.jpg'),
-       (4, 'Feder', 'Der klassische \"Fuelli\"', 10.00, 'Feder.jpg'),
-       (5, 'Lineal', 'Ein kleiner Lineal, 15cm lang', 5.00, 'Lineal.jpg'),
+       (2, 'Feder', 'Der klassische \"Fuelli\"', 10.00, 'Feder.jpg'),
+       (3, 'Lineal', 'Ein kleiner Lineal, 15cm lang', 5.00, 'Lineal.jpg'),
+       (4, 'Marker', 'Gelber Leuchtstift', 2.00, 'Marker.jpg'),
+       (5, 'Papier', '250 Blatt A4', 7.50, 'Papier.jpg'),
        (6, 'Zirkel', 'Ein Zirkel mit maximaler Spannweite von 30cm.', 15.50, 'Zirkel.jpg'),
-       (7, 'Spitzer', 'Spitzer fuer Bleistifte', 3.50, 'Spitzer.jpg');
+       (7, 'Spitzer', 'Spitzer fuer Bleistifte', 3.50, 'Spitzer.jpg'),
+       (8, 'Schere', 'Eine kleine Schere', 6.50, 'Schere.jpg'),
+       (9, 'Radiergummi', 'Ein Radiergummi für Tinte und Bleistift', 2.00, 'Radiergummi.jpg');
 
 CREATE TABLE `configuration`
 (
@@ -59,28 +61,27 @@ CREATE TABLE `configuration`
   DEFAULT CHARSET = utf8;
 
 INSERT INTO `configuration` (`id`, `article_id`, `content_id`)
-VALUES
-(1, 1, 1),
-(3, 1, 2),
-(4, 1, 3),
-(5, 1, 4),
-(6, 1, 5),
-(8, 2, 1),
-(9, 2, 2),
-(10, 2, 3),
-(11, 2, 6),
-(12, 2, 7);
+VALUES (1, 1, 1),
+       (2, 1, 3),
+       (3, 1, 5),
+       (4, 1, 7),
+       (5, 1, 9),
+       (6, 2, 1),
+       (7, 2, 2),
+       (8, 2, 4),
+       (9, 2, 6),
+       (10, 2, 8);
 
 CREATE TABLE `customer`
 (
     `id`             int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `firstname`      varchar(45)           DEFAULT NULL,
-    `lastname`       varchar(45)           DEFAULT NULL,
-    `street`         varchar(45)           DEFAULT NULL,
-    `city`           varchar(45)           DEFAULT NULL,
-    `zipcode`        int(4)                DEFAULT NULL,
-    `telephone`      varchar(10)           DEFAULT NULL,
-    `customer_since` timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `firstname`      varchar(45)               DEFAULT NULL,
+    `lastname`       varchar(45)               DEFAULT NULL,
+    `street`         varchar(45)               DEFAULT NULL,
+    `city`           varchar(45)               DEFAULT NULL,
+    `zipcode`        int(4)                    DEFAULT NULL,
+    `telephone`      varchar(10)               DEFAULT NULL,
+    `customer_since` timestamp        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -88,7 +89,7 @@ CREATE TABLE `customer`
 CREATE TABLE `order`
 (
     `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `customer_id` int(11) unsigned DEFAULT NULL,
+    `customer_id` int(11) unsigned          DEFAULT NULL,
     `date`        timestamp        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `annotations` varchar(255)              DEFAULT NULL,
     PRIMARY KEY (`id`),
@@ -105,7 +106,7 @@ CREATE TABLE `order_position`
     PRIMARY KEY (`id`),
     KEY `order_id` (`order_id`),
     KEY `article_id` (`article_id`),
-    FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
+    FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE CASCADE,
     FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -118,8 +119,8 @@ CREATE TABLE `order_configuration`
     PRIMARY KEY (`id`),
     KEY `order_position_id` (`order_position_id`),
     KEY `content_id` (`content_id`),
-    FOREIGN KEY (`order_position_id`) REFERENCES `order_position` (`id`),
+    FOREIGN KEY (`order_position_id`) REFERENCES `order_position` (`id`) ON DELETE CASCADE,
     FOREIGN KEY (`content_id`) REFERENCES `content` (`id`)
-    ON DELETE CASCADE
+        ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

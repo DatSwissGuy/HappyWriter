@@ -5,10 +5,12 @@ class CustomerController extends Controller
 {
 
     public function index() {
+        session_start();
         header('Location: /');
     }
 
     public function new_customer() {
+        session_start();
         require 'app/models/Order.php';
 
         if (!empty($_POST['order-id'])) {
@@ -22,6 +24,7 @@ class CustomerController extends Controller
     }
 
     public function verify_customer() {
+        session_start();
 
         $firstName = null;
         $lastName = null;

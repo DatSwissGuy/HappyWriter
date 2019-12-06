@@ -12,6 +12,7 @@
 <body>
 <div class="container">
     <h1>Danke für deine Bestellung!</h1>
+    <img src="/public/assets/images/logo.jpg">
 </div>
 </body>
 </html>

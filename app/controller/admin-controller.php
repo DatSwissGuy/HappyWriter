@@ -6,15 +6,15 @@ class AdminController extends Controller
 {
 
     public function index() {
-        if (!empty($_COOKIE['admin'])) {
-            require 'app/views/admin/admin-panel.php';
-        } else {
+        session_start();
+        if (empty($_COOKIE['admin']) || empty($_SESSION['logged-in'])) {
             require 'app/views/admin/login.php';
+            return;
         }
+        require 'app/views/admin/admin-panel.php';
     }
 
     public function admin_panel() {
-        session_start();
         $username = null;
         $password = null;
 
@@ -27,7 +27,9 @@ class AdminController extends Controller
         }
 
         if ($username === 'admin' && $password === 'admin') {
-            setcookie('admin', '$aSBoYXRlIHRoaXMgcHJvamVjdA==$', time() + 3599, '/', '', 0, 1);
+            setcookie('admin', '=479ae5ce40428338f078e302eb4b2df6', time() + 3599, '/', '', 0, 1);
+            session_start();
+            $_SESSION['logged-in'] = '=81ebdf58973eebe61c4435ef5b14090';
             require 'app/views/admin/admin-panel.php';
         } else {
             header('Location: /admin');
@@ -35,13 +37,16 @@ class AdminController extends Controller
     }
 
     public function logout() {
-        setcookie('admin', '$aSBoYXRlIHRoaXMgcHJvamVjdA==$', time() - 3600, '/');
+        session_start();
+        setcookie('admin', '=479ae5ce40428338f078e302eb4b2df6', time() - 3600, '/');
+        session_destroy();
+        session_unset();
         require 'app/views/admin/login.php';
     }
 
     public function add_content() {
-
-        if (empty($_COOKIE['admin'])) {
+        session_start();
+        if (empty($_COOKIE['admin']) || empty($_SESSION['logged-in'])) {
             require 'app/views/admin/login.php';
             return;
         }
@@ -91,7 +96,8 @@ class AdminController extends Controller
     }
 
     public function edit_contents() {
-        if (empty($_COOKIE['admin'])) {
+        session_start();
+        if (empty($_COOKIE['admin']) || empty($_SESSION['logged-in'])) {
             require 'app/views/admin/login.php';
             return;
         }
@@ -103,7 +109,8 @@ class AdminController extends Controller
     }
 
     public function edit_content() {
-        if (empty($_COOKIE['admin'])) {
+        session_start();
+        if (empty($_COOKIE['admin']) || empty($_SESSION['logged-in'])) {
             require 'app/views/admin/login.php';
             return;
         }
@@ -130,7 +137,8 @@ class AdminController extends Controller
     }
 
     public function update_content() {
-        if (empty($_COOKIE['admin'])) {
+        session_start();
+        if (empty($_COOKIE['admin']) || empty($_SESSION['logged-in'])) {
             require 'app/views/admin/login.php';
             return;
         }
@@ -182,7 +190,8 @@ class AdminController extends Controller
     }
 
     public function delete_content() {
-        if (empty($_COOKIE['admin'])) {
+        session_start();
+        if (empty($_COOKIE['admin']) || empty($_SESSION['logged-in'])) {
             require 'app/views/admin/login.php';
             return;
         }
@@ -195,17 +204,20 @@ class AdminController extends Controller
     }
 
 // TODO remove after debugging
-    public
-    function destroy_cookie() {
-        setcookie('admin', '$aSBoYXRlIHRoaXMgcHJvamVjdA==$', time() - 3600, '/');
+    public function destroy_cookie() {
+        session_start();
+        session_unset();
+        session_destroy();
+        setcookie('admin', '=479ae5ce40428338f078e302eb4b2df6', time() - 3600, '/');
         if (empty($_COOKIE['admin'])) {
             echo "Admin cookie destroyed";
         }
     }
 
 // TODO remove after debugging
-    public
-    function show_cookies() {
+    public function show_cookies() {
+        session_start();
         var_dump($_COOKIE);
+        var_dump($_SESSION);
     }
 }

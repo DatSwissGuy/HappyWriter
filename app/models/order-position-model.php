@@ -15,9 +15,7 @@ class OrderPositionModel
         $sql = "SELECT * FROM order";
         $query = $this->db->prepare($sql);
         $query->execute();
-
         $data = $query->fetchAll(PDO::FETCH_CLASS, 'OrderPosition');
-
         return $data;
     }
 
@@ -28,10 +26,13 @@ class OrderPositionModel
         $query->bindParam(':articleId', $articleId, PDO::PARAM_INT);
         $query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
         $query->execute();
-
         return $this->db->lastInsertId();
     }
 
-
-
+    public function delete(int $orderId) {
+        $sql = "DELETE FROM `order_position` WHERE `order_id` = :orderId";
+        $query = $this->db->prepare($sql);
+        $query->bindParam('orderId', $orderId, PDO::PARAM_INT);
+        $query->execute();
+    }
 }
